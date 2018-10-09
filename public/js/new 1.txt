@@ -1,0 +1,4 @@
+color button on click
+add link to webadvisor; cumulative gpa
+remove cr, w, x, i from repeat dropdown.  
+Use higher of two grades on repeat

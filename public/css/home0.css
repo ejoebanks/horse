@@ -1,0 +1,226 @@
+/*  ------ Main styling ------ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+#body {
+  padding: 10px;
+  padding-bottom: 30px;
+}
+
+#footer {
+  position: static;
+  clear: both;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: #454545;
+  text-align: center;
+  color: #999999;
+}
+
+/*  ------ Container for adding and resetting ------ */
+
+.form-actions {
+  background-color: transparent;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  width: 600px;
+}
+
+/*  ------ Tooltips ------ */
+
+.defo {
+  position: relative;
+  display: inline-block;
+}
+
+.defo .defotext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #f2f2f2;
+  color: #00467f;
+  text-align: center;
+  border: 1px solid #00467f;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.defo:hover .defotext {
+  visibility: visible;
+}
+
+/*  ------ Remove Button ------ */
+
+.wrapper {
+  text-align: center;
+}
+
+.btn_remove {
+  postion: absolute;
+  top: 50%;
+}
+
+/*  ------ Output boxes ------ */
+
+article {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  transform: translate(0, -50%);
+  padding: 1rem;
+}
+
+.head_out {
+  font-size: 2rem;
+  margin: 0 0 0.75rem 0;
+}
+
+div.err_box {
+  font-size: 30px;
+}
+
+.outputcontainer {
+  color: #00467f;
+  font-family: sans-serif;
+  font-size: 1.75rem;
+  line-height: 125%;
+  display: grid;
+  position: relative;
+  width: 400px;
+  margin: auto;
+  border: 2px solid #00467f;
+}
+
+.err_box {
+  text-align: center;
+  color: #00467f;
+  font-size: 1.75rem;
+  border: 2px solid #600000;
+  background-color: #ffe6e6;
+  width: 400px;
+  position: relative;
+  margin: auto;
+}
+
+.proj_box {
+  text-align: center;
+  color: #00467f;
+  font-size: 1.75rem;
+  border: 2px solid #600000;
+  background-color: #ffe6e6;
+  width: 400px;
+  position: relative;
+  margin: auto;
+  font-size: 30px;
+  display: none;
+}
+
+.left-half {
+  background: #f2f2f2;
+  grid-column: 1;
+  width: 198px;
+}
+
+.right-half {
+  background: #f2f2f2;
+  grid-column: 2;
+  width: 198px;
+}
+
+/*  ------ Cumulative and projection areas ------ */
+
+input[id="reveal-projection"], input[id="reveal-cumulative"] {
+  display: none;
+}
+
+input[id="reveal-projection"]:checked~.remove-check, input[id="reveal-cumulative"]:checked~.remove-check {
+  display: none;
+  margin: auto;
+}
+
+input[id="reveal-cumulative"]:checked~#cumulative {
+  display: block;
+  margin: auto;
+}
+
+#cumulative {
+  display: none;
+  text-align: center;
+}
+
+input[id="reveal-projection"] {
+  display: none;
+}
+
+input[id="reveal-projection"]:checked~.remove-check {
+  display: none;
+  margin: auto;
+}
+
+input[id="reveal-projection"]:checked~#projection {
+  display: block;
+  margin: auto;
+}
+
+#projection {
+  display: none;
+  text-align: center;
+}
+
+input.pastgpa, input.credtaken, input.checkbox, input.targetgpa, input.credleft {
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.dheader {
+  text-align: center;
+  font-weight: bold;
+}
+
+.topper {
+  display: inline;
+}
+
+.descript {
+  float: left;
+  font-size: 15px;
+  text-align: left;
+  padding-top: 10px;
+}
+
+/*  ------ Repeat checkbox ------ */
+
+.btn_repeat {
+  text-align: center;
+}
+
+select.grds {
+  float: right;
+  display: none;
+  padding: 2px;
+}
+
+.repeatCheck {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*  ------ Tables ------ */
+

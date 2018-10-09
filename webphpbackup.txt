@@ -1,0 +1,36 @@
+/*
+//CRUD for users
+Route::get('/users', 'UserController@index');
+Route::get('/create/user', 'UserController@create');
+Route::post('/create/user', 'UserController@store');
+Route::get('/edit/user/{id}', 'UserController@edit');
+Route::post('/edit/user/{id}', 'UserController@update');
+Route::delete('/delete/user/{id}', 'UserController@destroy');
+
+//CRUD for colleges
+Route::get('/colleges', 'CollegeController@index');
+Route::get('/create/college', 'CollegeController@create');
+Route::post('/create/college', 'CollegeController@store');
+Route::get('/edit/college/{id}', 'CollegeController@edit');
+Route::post('/edit/college/{id}', 'CollegeController@update');
+Route::delete('/delete/college/{id}', 'CollegeController@destroy');
+
+//CRUD for courses
+Route::resource('/courses', 'CourseController');
+
+Route::get('/courses', 'CourseController@index');
+Route::get('/create/course', 'CourseController@create');
+Route::post('/create/course', 'CourseController@store');
+Route::get('/edit/course/{id}', 'CourseController@edit');
+Route::post('/edit/course/{id}', 'CourseController@update');
+Route::delete('/delete/course/{id}', 'CourseController@destroy');
+
+//CRUD for grades
+Route::resource('/grades', 'GradeController');
+Route::get('/grades', 'GradeController@index');
+Route::get('/create/grade', 'GradeController@create');
+Route::post('/create/grade', 'GradeController@store');
+Route::get('/edit/grade/{id}', 'GradeController@edit');
+Route::post('/edit/grade/{id}', 'GradeController@update');
+Route::delete('/delete/grade/{id}', 'GradeController@destroy');
+*/
