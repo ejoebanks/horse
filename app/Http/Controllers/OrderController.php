@@ -1,0 +1,164 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Order;
+
+class OrderController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $order = \DB::table('orders')
+        ->join('services', 'services.id', '=', 'orders.serviceid')
+        ->select('orders.*', 'services.servicename as servname', 'services.id as servid')
+        ->oldest()
+        ->get();
+        return view('order.index', compact('order'));
+    }
+
+    public function appointment($id)
+    {
+        $order = \DB::table('orders')
+        ->join('services', 'services.id', '=', 'orders.serviceid')
+        ->join('locations', 'locations.id', '=', 'orders.locationid')
+        ->join('users', 'users.id', '=', 'orders.clientid')
+        ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
+        ->select('orders.*', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->where('orders.id', '=', $id)
+        ->get();
+
+        return view('order.appointment', compact('order'));
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('order.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $order = new Order([
+             'studentid'=> $request->get('studentid'),
+             'courseid'=> $request->get('courseid'),
+             'courseorder'=> $request->get('courseorder')
+         ]);
+
+        $order->save();
+        return redirect('/order');
+    }
+
+    public function storeHome(Request $request)
+    {
+        $order = new Order([
+             'studentid'=> $id = \Auth::user()->id,
+             'courseid'=> $request->get('courseid'),
+             'courseorder'=> $request->get('courseorder')
+         ]);
+
+        $order->save();
+        return redirect('/home');
+    }
+
+
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $order = Order::where('id', $id)
+                    ->join('services', 'services.id', '=', 'orders.serviceid')
+                    ->first();
+
+
+        return view('order.edit', compact('order', 'id'));
+    }
+
+    public function singleEdit($id)
+    {
+        $order = Order::where('id', $id)
+                    ->first();
+
+        return view('order.edits', compact('order', 'id'));
+    }
+
+    public function singleUpdate(Request $request, $id)
+    {
+        $order = new Order();
+        $data = $this->validate($request, [
+          'courseorder'=> 'required',
+        ]);
+        $data['id'] = $id;
+        $order->updatePersonal($data);
+
+        return redirect('/home');
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $data = $this->validate($request, [
+          'studentid'=>'required',
+          'courseid'=> 'required',
+          'courseorder'=> 'required',
+        ]);
+        $data['id'] = $id;
+        $order->Updateorder($data);
+
+        return redirect('/order');
+    }
+
+
+    public function destroy($id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect('/order');
+    }
+
+    public function singleDestroy($id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect('/home');
+    }
+
+    public function approveOrder($id)
+    {
+        $order = Order::find($id);
+        $order->status = 1;
+        $order->save();
+        return redirect('/home');
+    }
+
+    public function cancelOrder($id)
+    {
+        $order = Order::find($id);
+        $order->status = 0;
+        $order->save();
+        return redirect('/home');
+    }
+}
