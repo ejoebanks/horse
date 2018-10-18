@@ -26,6 +26,13 @@
                                         @include('functions.locations')
                                     </div>
                                 </div>
+																<div class="col-md-6">
+																		<div class="form-group">
+																				<label class="control-label" for="location">Buildings</label>
+																				@include('functions.buildings')
+																		</div>
+																</div>
+
                                 <!-- Text input-->
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -45,7 +52,7 @@
                                     </div>
                                 </div>
                                 <!-- Select Basic -->
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="appointmentfor">Appointment For</label>
                                         @include('functions.services')
