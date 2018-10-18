@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-if (Auth::user() != null && Auth::user()->admin == 1) {
+if (Auth::user() != null && Auth::user()->type == 1) {
     ?>
 
 <div class="container">
@@ -75,7 +75,7 @@ if (Auth::user() != null && Auth::user()->admin == 1) {
           <div class="form-group">
             <input type="hidden" value="{{csrf_token()}}" name="_token" />
             <label for="sel1">Admin Priviliges:</label>
-            <select class="form-control" id="admin" name="admin">
+            <select class="form-control" id="type" name="type">
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>

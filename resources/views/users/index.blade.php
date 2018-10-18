@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+<br/>
 <?php
-if (Auth::user() != null && Auth::user()->admin == 1) {
+if (Auth::user() != null && Auth::user()->type == 1) {
     ?>
 
 <div class="container">
@@ -35,7 +35,7 @@ if (Auth::user() != null && Auth::user()->admin == 1) {
                 <td>{{$user->state}}</td>
                 <td>{{$user->email}}</td>
                 <td class="forcedWidth">{{$user->password}}</td>
-                <td>{{$user->admin}}</td>
+                <td>{{$user->type}}</td>
 
                 <td><a href="{{action('UserController@edit',$user->id)}}" class="btn btn-primary">Edit</a></td>
                 <td>
@@ -50,7 +50,7 @@ if (Auth::user() != null && Auth::user()->admin == 1) {
         </tbody>
     </table>
   </div>
-    <a href="{{ action('UserController@create') }}" button type="submit" class="btn btn-primary">Insert New Student</button></a>
+    <a href="{{ action('UserController@create') }}" button type="submit" class="btn btn-primary">Insert New User</button></a>
 
 <div>
 <?php

@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-if (Auth::user() != null && Auth::user()->admin == 1) {
+if (Auth::user() != null && Auth::user()->type == 1) {
     ?>
 
 <div class="container">
