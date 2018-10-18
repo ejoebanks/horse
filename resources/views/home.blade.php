@@ -1,8 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-?>
+
+<!--
+<div class="row">
+  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+</div>
+
+<div class="row">
+  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+</div>
+
+<div class="row">
+  <div class="col-6">.col-6</div>
+  <div class="col-6">.col-6</div>
+</div>
+-->
+@if(Auth::user()->type == 1)
+<br/>
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
@@ -10,13 +28,14 @@
 <br/>
         <?php
         $requestQuery = DB::table('orders')
-                       ->join('orderstatus', 'orders.id', '=', 'orderstatus.orderid')
                        ->join('users', 'users.id', '=', 'orders.employeeid')
-                       ->join('services', 'services.serviceid', '=', 'orders.serviceid')
-                       ->join('buildings', 'buildings.buildingid', '=', 'orders.buildingid')
+                       ->join('services', 'services.id', '=', 'orders.serviceid')
+                       ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
                        ->join('locations', 'locations.id', '=', 'orders.locationid')
-                       ->select('orders.*', 'orderstatus.status', 'users.*', 'locations.*', 'services.*', 'buildings.buildingname')
+                       ->select('orders.*', 'users.*', 'locations.*', 'services.*', 'buildings.buildingname')
+                       ->where('orders.employeeid', Auth::user()->id)
                        ->get();
+
         foreach ($requestQuery as $req){
           if($req->status == 0){
             $servicename = $req->servicename;
@@ -36,14 +55,14 @@
             ?>
           <div class="container">
             <div class = "row">
-              <a href="" class="btn btn-outline-dark btn-sm">View</a></td>
+              <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
               <?php  echo str_repeat("&nbsp;", 3); ?>
 
-              <a href="{{action('GradeController@singleEdit',$req->id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
+              <a href="{{action('OrderController@approveOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
 
               <?php  echo str_repeat("&nbsp;", 3); ?>
 
-              <form action="{{action('GradeController@singleDestroy',$req->id)}}" method="post">
+              <form action="}" method="post">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="DELETE">
                 <button class="btn btn-outline-dark btn-sm" onclick="return confirm('Are you sure?')" type="submit">Deny</button>
@@ -102,13 +121,13 @@
           <div class="container">
             <div class = "row">
 
-              <a href="" class="btn btn-outline-dark btn-sm">View</a></td>
+              <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
               <?php  echo str_repeat("&nbsp;", 3); ?>
 
-              <a href="{{action('GradeController@singleEdit',$req->id)}}" class="btn btn-outline-dark btn-sm">Request Change</a></td>
+              <a href="" class="btn btn-outline-dark btn-sm">Request Change</a></td>
 
               <?php  echo str_repeat("&nbsp;", 3); ?>
-              <a href="{{action('GradeController@singleEdit',$req->id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
+              <a href="{{action('OrderController@cancelOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
 
 
         </div>
@@ -144,7 +163,7 @@
         <div class="container">
           <div class = "row">
 
-            <a href="" class="btn btn-outline-dark btn-sm">View</a></td>
+            <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
           </div>
         </div>
         <?php
@@ -155,5 +174,94 @@
   </div>
 </div>
 </div>
+@endif
+
+@if(Auth::user()->type == 0)
+<header class="business-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="display-3 text-center text-white mt-4">Horse Braiding</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h2 class="mt-4">What We Do</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
+      </p>
+    </div>
+    <div class="col-sm-4">
+      <h2 class="mt-4">Contact Us</h2>
+      <address>
+        <strong>Start Bootstrap</strong>
+        <br>3481 Melrose Place
+        <br>Beverly Hills, CA 90210
+        <br>
+      </address>
+      <address>
+        <abbr title="Phone">P:</abbr>
+        (123) 456-7890
+        <br>
+        <abbr title="Email">E:</abbr>
+        <a href="mailto:#">name@example.com</a>
+      </address>
+    </div>
+  </div>
+  <!-- /.row -->
+
+  <div class="row">
+    <div class="col-sm-4 my-4">
+      <div class="card">
+        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <div class="card-body">
+          <h4 class="card-title">Card title</h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Find Out More!</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 my-4">
+      <div class="card">
+        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <div class="card-body">
+          <h4 class="card-title">Card title</h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Find Out More!</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 my-4">
+      <div class="card">
+        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <div class="card-body">
+          <h4 class="card-title">Card title</h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Find Out More!</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
 </div>
+
+@endif
+
+
 @endsection
