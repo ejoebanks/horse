@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bstrap.css') }}">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
@@ -30,7 +32,7 @@
     <div id="app">
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ ('Horse Braiding Scheduling') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +53,15 @@
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 
                         @else
+                        <?php
+                        $id = Auth::user()->id;
+                        if ($id == 1){ ?>
+                          <li><a class="nav-link" href="/home" class="dropdown-item">View Schedule</a></li>
+                        <?php } ?>
+
+                            <li><a class="nav-link" href="/gallery">Gallery</a></li>
+                            <li><a class="nav-link" href="#">Place Order</a></li>
+
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -59,10 +70,6 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <!--  Admin authentication -->
-                                  <?php
-                                  $id = Auth::user()->id;
-                                      ?>
                                     <a href="{{action('UserController@singleEdit', $id)}}" class="dropdown-item">Update Account</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -4,13 +4,13 @@
 
       $services = DB::table('services')
         ->select('services.*')
-        ->orderBy('serviceid', 'asc')
+        ->orderBy('id', 'asc')
         ->get();
 
 
     foreach ($services as $serv) {
         ?>
-      <option value="<?= $serv->serviceid ?>"><?= $serv->servicename ?></option>
+      <option value="<?= $serv->id ?>"><?= $serv->servicename ?></option>
   <?php
     } ?>
 </select>
