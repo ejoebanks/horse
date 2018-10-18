@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,24 +9,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/upload', function () {
-    return view('layouts.upload');
-});
-
 Route::get('/admin', function () {
-    return view('/gpa/admin');
+    return view('admin.admin');
+});
+
+Route::get('/gallery', function () {
+    return view('gallery');
+});
+
+Route::get('', function () {
+    return view('landing');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 Route::get('login', array(
     'uses' => 'MainController@showLogin'
@@ -37,71 +33,32 @@ Route::get('login', array(
 Route::post('login', array(
     'uses' => 'MainController@doLogin'
 ));
+
 Route::get('logout', array(
     'uses' => 'MainController@doLogout'
 ));
-Route::get(
-    '/',
-function () {
-    return view('welcome');
-}
-);
 
 Auth::routes();
 
-Route::get('/gpa', 'GPAController@index');
-
 //CRUDS
 Route::resource('users', 'UserController');
-Route::resource('courses', 'CourseController');
-Route::resource('colleges', 'CollegeController');
-Route::resource('grade', 'GradeController');
+Route::resource('buildings', 'BuildingController');
+Route::resource('services', 'ServiceController');
+Route::resource('order', 'OrderController');
 
+Route::get('/view/{id}', 'OrderController@appointment');
 
-//User edits for grade
-Route::get('/edits/grades/{id}', 'GradeController@singleEdit');
-Route::post('/edits/grade/{id}', 'GradeController@singleUpdate');
-Route::delete('/deletes/grade/{id}', 'GradeController@singleDestroy');
-
-//Store Grade from user input
-Route::post('/home', 'GradeController@storeHome');
+Route::get('/deny/{id}', 'OrderController@cancelOrder');
+Route::get('/confirm/{id}', 'OrderController@approveOrder');
 
 //Account details update
 Route::get('/update/user/{id}', 'UserController@singleEdit');
 Route::post('/update/user/{id}', 'UserController@singleUpdate');
 
-//Calculate Page
-Route::post('/calculate', function () {
-    return view('calculate');
-});
 Route::get('/calculate', function () {
     return view('calculate');
 });
 
 Route::get('/schedule', function () {
     return view('appointment');
-});
-
-
-Route::get('/results', function () {
-    return view('results');
-});
-
-
-Route::post('/calcterm', function () {
-    return view('calcterm');
-});
-Route::get('/calcterm', function () {
-    return view('calcterm');
-});
-
-Route::post('/test', function () {
-    return view('testpage');
-});
-Route::get('/test', function () {
-    return view('testpage');
-});
-
-Route::get('/horse', function () {
-    return view('horseadmin');
 });
