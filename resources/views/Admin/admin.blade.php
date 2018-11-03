@@ -13,7 +13,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 
       <div class="col-sm-4">
           <a href="/services" button type="button" class="btn btn-primary btn-lg btn-block">Services</button></a>
-          <a href="/bldngs" button type="button" class="btn btn-primary btn-lg btn-block">Buildings</button></a>
+          <a href="/buildings" button type="button" class="btn btn-primary btn-lg btn-block">Buildings</button></a>
           <a href="/locs" button type="button" class="btn btn-primary btn-lg btn-block">Locations</button></a>
           <a href="/users" button type="button" class="btn btn-primary btn-lg btn-block">Users</button></a>
           <a href="/ords" button type="button" class="btn btn-primary btn-lg btn-block">Orders</button></a>

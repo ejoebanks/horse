@@ -23,7 +23,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         <div class="form-group">
             <input type="hidden" value="{{csrf_token()}}" name="_token" />
             <label for="locationid">Location:</label>
-            <input type="text" class="form-control" name="coursename" value="{{ $building->locationid }}" />
+            <input type="text" class="form-control" name="locationid" value="{{ $building->locationid }}" />
         </div>
 
         <div class="form-group">

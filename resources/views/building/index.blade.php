@@ -9,9 +9,9 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         <thead>
             <tr>
               <td>ID</td>
+              <td>Location</td>
               <td>Name</td>
-              <td>Credits</td>
-              <td>Course Description</td>
+              <td>Comments</td>
 
               <td colspan="2">Action</td>
             </tr>
