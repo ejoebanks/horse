@@ -28,48 +28,50 @@
 <br/>
         <?php
         $requestQuery = DB::table('orders')
-                       ->join('users', 'users.id', '=', 'orders.employeeid')
+                       ->leftjoin('users as employee', 'employee.id', '=', 'orders.employeeid')
+                       ->leftjoin('users as client', 'client.id', '=', 'orders.clientid')
                        ->join('services', 'services.id', '=', 'orders.serviceid')
                        ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
                        ->join('locations', 'locations.id', '=', 'orders.locationid')
-                       ->select('orders.*', 'users.*', 'locations.*', 'services.*', 'buildings.buildingname')
+                       ->select('orders.*', 'employee.firstname as emp_fname', 'client.firstname as client_fname', 'client.lastname as client_lname', 'locations.*', 'services.*', 'buildings.buildingname')
                        ->where('orders.employeeid', Auth::user()->id)
                        ->get();
 
         foreach ($requestQuery as $req){
           if($req->status == 0){
             $servicename = $req->servicename;
-            $client = $req->firstname." ".$req->lastname;
-            $loc = $req->address;
+            $client = $req->client_fname." ".$req->client_lname;
+            $loc = $req->address.", ".$req->city.", ".$req->state;
             $stable = $req->stablenumber;
             $building = $req->buildingname;
             $time = $req->scheduledtime;
             $date = new DateTime($time);
             $req_date = date_format($date, "F j, Y, g:i a");
+            print "<ul class='list-group'>";
+            print "<li class='list-group-item list-group-item-warning' ><h4> $client </h4></li>";
+            print "<li class='list-group-item'>$req_date </li>";
+            print "<li class='list-group-item'> $servicename </li>";
+            print "<li class='list-group-item'> $loc </li>";
+            print "<li class='list-group-item'>$building </li>";
+            print "<li class='list-group-item'>";
+            ?> <div class="container">
+                        <div class = "row">
+                          <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                          <?php  echo str_repeat("&nbsp;", 3); ?>
 
-            print "<h4><strong>Time:</strong> $req_date</h4>";
-            print "<h4><strong>Service:</strong> $servicename<br/></h4>";
-            print "<h4><strong>Location:</strong> $loc</h4>";
-            print "<h4><strong>Building:</strong> $building</h4>";
-            print "<h4><strong>Client:</strong> $client</h4>";
-            ?>
-          <div class="container">
-            <div class = "row">
-              <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
-              <?php  echo str_repeat("&nbsp;", 3); ?>
+                          <a href="{{action('OrderController@approveOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
 
-              <a href="{{action('OrderController@approveOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
+                          <?php  echo str_repeat("&nbsp;", 3); ?>
 
-              <?php  echo str_repeat("&nbsp;", 3); ?>
-
-              <form action="}" method="post">
-                {{csrf_field()}}
-                <input name="_method" type="hidden" value="DELETE">
-                <button class="btn btn-outline-dark btn-sm" onclick="return confirm('Are you sure?')" type="submit">Deny</button>
-              </form>
-            </div>
-          </div>
-          <?php
+                          <form action="}" method="post">
+                            {{csrf_field()}}
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-outline-dark btn-sm" onclick="return confirm('Are you sure?')" type="submit">Deny</button>
+                          </form>
+                        </div>
+                      </div><?php
+            print "</li>";
+            print "</ul>";
           print "<br/>";
         }
         }
@@ -104,35 +106,35 @@
         foreach ($requestQuery as $req){
           if($req->status == 1){
             $servicename = $req->servicename;
-            $client = $req->firstname." ".$req->lastname;
-            $loc = $req->address;
+            $client = $req->client_fname." ".$req->client_lname;
+            $loc = $req->address.", ".$req->city.", ".$req->state;
             $stable = $req->stablenumber;
             $building = $req->buildingname;
             $time = $req->scheduledtime;
             $date = new DateTime($time);
             $req_date = date_format($date, "F j, Y, g:i a");
 
-            print "<h4><strong>Time:</strong> $req_date</h4>";
-            print "<h4><strong>Service:</strong> $servicename<br/></h4>";
-            print "<h4><strong>Location:</strong> $loc</h4>";
-            print "<h4><strong>Building:</strong> $building</h4>";
-            print "<h4><strong>Client:</strong> $client</h4>";
-            ?>
-          <div class="container">
-            <div class = "row">
+            print "<ul class='list-group'>";
+            print "<li class='list-group-item list-group-item-info' ><h4> $client </h4></li>";
+            print "<li class='list-group-item'>$req_date </li>";
+            print "<li class='list-group-item'> $servicename </li>";
+            print "<li class='list-group-item'> $loc </li>";
+            print "<li class='list-group-item'>$building </li>";
+            print "<li class='list-group-item'>";
+            ?> <div class="container">
+                        <div class = "row">
+                          <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                          <?php  echo str_repeat("&nbsp;", 3); ?>
 
-              <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
-              <?php  echo str_repeat("&nbsp;", 3); ?>
+                          <a href="" class="btn btn-outline-dark btn-sm">Request Change</a></td>
 
-              <a href="" class="btn btn-outline-dark btn-sm">Request Change</a></td>
-
-              <?php  echo str_repeat("&nbsp;", 3); ?>
-              <a href="{{action('OrderController@cancelOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
-
-
-        </div>
-          </div>
-          <?php
+                          <?php  echo str_repeat("&nbsp;", 3); ?>
+                          <a href="{{action('OrderController@cancelOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
+                        </div>
+                      </div><?php
+            print "</li>";
+            print "</ul>";
+          print "<br/>";
           print "<br/>";
         }
         }
@@ -146,27 +148,29 @@
       foreach ($requestQuery as $req){
         if($req->status == 2){
           $servicename = $req->servicename;
-          $client = $req->firstname." ".$req->lastname;
-          $loc = $req->address;
+          $client = $req->client_fname." ".$req->client_lname;
+          $loc = $req->address.", ".$req->city.", ".$req->state;
           $stable = $req->stablenumber;
           $building = $req->buildingname;
           $time = $req->scheduledtime;
           $date = new DateTime($time);
           $req_date = date_format($date, "F j, Y, g:i a");
 
-          print "<h4><strong>Time:</strong> $req_date</h4>";
-          print "<h4><strong>Service:</strong> $servicename<br/></h4>";
-          print "<h4><strong>Location:</strong> $loc</h4>";
-          print "<h4><strong>Building:</strong> $building</h4>";
-          print "<h4><strong>Client:</strong> $client</h4>";
-          ?>
-        <div class="container">
-          <div class = "row">
-
-            <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
-          </div>
-        </div>
-        <?php
+          print "<ul class='list-group'>";
+          print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
+          print "<li class='list-group-item'>$req_date </li>";
+          print "<li class='list-group-item'> $servicename </li>";
+          print "<li class='list-group-item'> $loc </li>";
+          print "<li class='list-group-item'>$building </li>";
+          print "<li class='list-group-item'>";
+          ?> <div class="container">
+                      <div class = "row">
+                        <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                      </div>
+                    </div><?php
+          print "</li>";
+          print "</ul>";
+        print "<br/>";
         print "<br/>";
       }
       }
