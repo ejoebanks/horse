@@ -68,7 +68,7 @@ $id = Auth::user()->id;
                   </a>
                 </li>
                 <li>
-                  <a class="nav-link" href="#">Place Order
+                  <a class="nav-link" href="/schedule">Place Order
                   </a>
                 </li>
                 <li class="nav-item dropdown">
