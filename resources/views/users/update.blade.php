@@ -15,6 +15,11 @@ if (Auth::user() != null && Auth::user()->id == $user->id) {
     </div><br />
 @endif
     <div class="container">
+      <div class="row">
+        <div class="col">
+</div>
+
+<div class="col-6">
       <form class="form-horizontal" role="form" method="POST" action="{{ action('UserController@singleUpdate',$user->id) }}">
            {!! csrf_field() !!}
 
@@ -65,7 +70,10 @@ if (Auth::user() != null && Auth::user()->id == $user->id) {
 
         <button type="submit" class="btn btn-primary">Update</button>
         </form>
-    </div>
+      </div>
+    <div class="col">
+</div>
+</div>
 </div>
 <?php
 } else {
