@@ -2,23 +2,6 @@
 
 @section('content')
 
-<!--
-<div class="row">
-  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-  <div class="col-12 col-md-8">.col-12 .col-md-8</div>
-</div>
-
-<div class="row">
-  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-  <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-</div>
-
-<div class="row">
-  <div class="col-6">.col-6</div>
-  <div class="col-6">.col-6</div>
-</div>
--->
 @if(Auth::user()->type == 1)
 <br/>
 <div class="container-fluid">
@@ -45,10 +28,12 @@
             $stable = $req->stablenumber;
             $building = $req->buildingname;
             $time = $req->scheduledtime;
+            $horse = $req->horsename;
             $date = new DateTime($time);
             $req_date = date_format($date, "F j, Y, g:i a");
             print "<ul class='list-group'>";
             print "<li class='list-group-item list-group-item-warning' ><h4> $client </h4></li>";
+            print "<li class='list-group-item'>$horse </li>";
             print "<li class='list-group-item'>$req_date </li>";
             print "<li class='list-group-item'> $servicename </li>";
             print "<li class='list-group-item'> $loc </li>";
@@ -109,6 +94,7 @@
             $client = $req->client_fname." ".$req->client_lname;
             $loc = $req->address.", ".$req->city.", ".$req->state;
             $stable = $req->stablenumber;
+            $horse = $req->horsename;
             $building = $req->buildingname;
             $time = $req->scheduledtime;
             $date = new DateTime($time);
@@ -116,6 +102,7 @@
 
             print "<ul class='list-group'>";
             print "<li class='list-group-item list-group-item-info' ><h4> $client </h4></li>";
+            print "<li class='list-group-item'>$horse </li>";
             print "<li class='list-group-item'>$req_date </li>";
             print "<li class='list-group-item'> $servicename </li>";
             print "<li class='list-group-item'> $loc </li>";
@@ -151,6 +138,7 @@
           $client = $req->client_fname." ".$req->client_lname;
           $loc = $req->address.", ".$req->city.", ".$req->state;
           $stable = $req->stablenumber;
+          $horse = $req->horsename;
           $building = $req->buildingname;
           $time = $req->scheduledtime;
           $date = new DateTime($time);
@@ -159,6 +147,7 @@
           print "<ul class='list-group'>";
           print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
           print "<li class='list-group-item'>$req_date </li>";
+          print "<li class='list-group-item'>$horse </li>";
           print "<li class='list-group-item'> $servicename </li>";
           print "<li class='list-group-item'> $loc </li>";
           print "<li class='list-group-item'>$building </li>";
