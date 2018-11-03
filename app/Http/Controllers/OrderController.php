@@ -19,7 +19,7 @@ class OrderController extends Controller
         ->select('orders.*', 'services.servicename as servname', 'services.id as servid')
         ->oldest()
         ->get();
-        return view('order.index', compact('order'));
+        return view('crud.order.index', compact('order'));
     }
 
     public function appointment($id)
@@ -33,7 +33,7 @@ class OrderController extends Controller
         ->where('orders.id', '=', $id)
         ->get();
 
-        return view('order.appointment', compact('order'));
+        return view('crud.order.appointment', compact('order'));
     }
 
 
@@ -44,20 +44,26 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order.create');
+        return view('crud.order.create');
     }
 
 
     public function store(Request $request)
     {
         $order = new Order([
-             'studentid'=> $request->get('studentid'),
-             'courseid'=> $request->get('courseid'),
-             'courseorder'=> $request->get('courseorder')
+             'horsename'=> $request->get('horsename'),
+             'serviceid'=> $request->get('serviceid'),
+             'employeeid'=> $request->get('employeeid'),
+             'clientid'=> $request->get('clientid'),
+             'locationid'=> $request->get('locationid'),
+             'buildingid'=> $request->get('buildingid'),
+             'stablenumber'=> $request->get('stablenumber'),
+             'scheduledtime'=> $request->get('scheduledtime'),
+             'status'=> $request->get('status')
          ]);
 
         $order->save();
-        return redirect('/order');
+        return redirect('/orders');
     }
 
     public function storeHome(Request $request)
@@ -91,7 +97,7 @@ class OrderController extends Controller
                     ->first();
 
 
-        return view('order.edit', compact('order', 'id'));
+        return view('crud.order.edit', compact('order', 'id'));
     }
 
     public function singleEdit($id)
@@ -99,7 +105,7 @@ class OrderController extends Controller
         $order = Order::where('id', $id)
                     ->first();
 
-        return view('order.edits', compact('order', 'id'));
+        return view('crud.order.edits', compact('order', 'id'));
     }
 
     public function singleUpdate(Request $request, $id)

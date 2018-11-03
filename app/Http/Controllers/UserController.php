@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         //$users = User::where('id', auth()->user()->id)->get();
         $users = \DB::table('users')->oldest()->get();
-        return view('users.index', compact('users'));
+        return view('crud.users.index', compact('users'));
     }
 
     /**
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('crud.users.create');
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class UserController extends Controller
         $user = User::where('id', $id)
                       ->first();
 
-        return view('users.edit', compact('user', 'id'));
+        return view('crud.users.edit', compact('user', 'id'));
     }
 
     public function singleEdit($id)
@@ -70,7 +70,7 @@ class UserController extends Controller
         $user = User::where('id', $id)
                       ->first();
 
-        return view('users.update', compact('user', 'id'));
+        return view('crud.users.update', compact('user', 'id'));
     }
 
     public function update(Request $request, $id)

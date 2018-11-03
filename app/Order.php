@@ -11,10 +11,10 @@ class Order extends Model
 
     protected $fillable = [
       'serviceid', 'employeeid', 'clientid', 'locationid', 'buildingid',
-      'stablenumber'
+      'stablenumber', 'horsename', 'comments'
   ];
 
-    public function updateGrade($data)
+    public function updateOrder($data)
     {
         $order = $this->find($data['id']);
         $order->serviceid = $data['serviceid'];
@@ -23,6 +23,8 @@ class Order extends Model
         $order->locationid = $data['locationid'];
         $order->buildingid = $data['buildingid'];
         $order->stablenumber = $data['stablenumber'];
+        $order->horsename = $data['horsename'];
+        $order->comments = $data['comments'];
         $order->save();
         return 1;
     }
@@ -47,7 +49,4 @@ class Order extends Model
         $order->save();
         return 1;
     }
-
-
-
 }

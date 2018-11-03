@@ -16,7 +16,7 @@ class ServiceController extends Controller
     {
         //$users = User::where('id', auth()->user()->id)->get();
         $service = \DB::table('services')->oldest()->get();
-        return view('service.index', compact('service'));
+        return view('crud.service.index', compact('service'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('service.create');
+        return view('crud.service.create');
     }
 
     public function store(Request $request)
@@ -56,7 +56,7 @@ class ServiceController extends Controller
         $service = Service::where('id', $id)
                       ->first();
 
-        return view('service.edit', compact('service', 'id'));
+        return view('crud.service.edit', compact('service', 'id'));
     }
 
     public function update(Request $request, $id)

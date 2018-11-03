@@ -16,7 +16,7 @@ class BuildingController extends Controller
     {
         //$users = User::where('id', auth()->user()->id)->get();
         $building = \DB::table('buildings')->oldest()->get();
-        return view('building.index', compact('building'));
+        return view('crud.building.index', compact('building'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        return view('building.create');
+        return view('crud.building.create');
     }
 
     public function store(Request $request)
@@ -57,7 +57,7 @@ class BuildingController extends Controller
         $building = Building::where('id', $id)
                       ->first();
 
-        return view('building.edit', compact('building', 'id'));
+        return view('crud.building.edit', compact('building', 'id'));
     }
 
     public function update(Request $request, $id)
