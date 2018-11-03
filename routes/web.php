@@ -44,7 +44,8 @@ Auth::routes();
 Route::resource('users', 'UserController');
 Route::resource('buildings', 'BuildingController');
 Route::resource('services', 'ServiceController');
-Route::resource('order', 'OrderController');
+Route::resource('orders', 'OrderController');
+Route::resource('locations', 'LocationController');
 
 Route::get('/view/{id}', 'OrderController@appointment');
 
