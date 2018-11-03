@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'address', 'city', 'state', 'password', 'admin'
+        'firstname', 'lastname', 'email', 'address', 'city', 'state', 'password', 'type'
     ];
 
     public function updateUser($data)
@@ -27,7 +27,7 @@ class User extends Authenticatable
         $user->city = $data['city'];
         $user->state = $data['state'];
         $user->email = $data['email'];
-        $user->admin = $data['admin'];
+        $user->type = $data['type'];
         $user->password = bcrypt($data['password']);
         $user->save();
         return 1;

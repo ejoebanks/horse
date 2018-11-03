@@ -13,7 +13,7 @@ class Service extends Model
       'servicename', 'servicedescription',
   ];
 
-    public function updateCollege($data)
+    public function updateService($data)
     {
         $service = $this->find($data['id']);
         $service->servicename = $data['servicename'];

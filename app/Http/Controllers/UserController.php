@@ -38,7 +38,7 @@ class UserController extends Controller
             'city'=> $request->get('city'),
             'state'=> $request->get('state'),
             'email'=> $request->get('email'),
-            'admin'=> $request->get('admin'),
+            'type'=> $request->get('type'),
             'password'=> bcrypt($request->get('password'))
         ]);
 
@@ -84,7 +84,7 @@ class UserController extends Controller
           'state'=> 'required|string|max:255',
           'email'=> 'required|string|email|max:255',
           'password'=> 'required|string|min:6',
-          'admin'=> 'required'
+          'type'=> 'required'
         ]);
         $data['id'] = $id;
         $user->updateUser($data);
