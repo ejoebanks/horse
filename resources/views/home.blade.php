@@ -77,10 +77,6 @@
                       <div class = "row">
                       </div>
                     </div>
-
-                    <?php
-
-            ?>
     </div>
 
     <div class="col-sm-4">
@@ -255,6 +251,4 @@
 </div>
 
 @endif
-
-
 @endsection
