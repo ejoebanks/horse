@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="container">
 	<div class="row">
 <div class="col-md-6">
-                    <div class="well-block">
-                        <div class="well-title">
+  <div class="well-block">
+              <div class="well-title">
                             <h2>Request an Appointment</h2>
                         </div>
                         <form>
