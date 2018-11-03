@@ -76,9 +76,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
             <option value="0">No</option>
           </select>
         </div>
-
-
-
        <button type="submit" class="btn btn-primary">Create</button>
         </form>
 
