@@ -24,25 +24,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
             <input type="text" class="form-control" name="studentid" required/>
         </div>
       -->
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-6">
-                  <div class="form-group">
-                      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                          <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                          <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <script type="text/javascript">
-                  $(function () {
-                      $('#datetimepicker1').datetimepicker();
-                  });
-              </script>
-          </div>
-      </div>
+
         <div class="form-group">
           <input type="hidden" value="{{csrf_token()}}" name="_token"/>
             <label for="employeeid">Employee:</label>
@@ -62,13 +44,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
             </select>
           </div>
 
-<!--
-        <div class="form-group">
-            <input type="hidden" value="{{csrf_token()}}" name="_token" />
-            <label for="courseid">Course ID:</label>
-            <input type="text" class="form-control" name="courseid"/>
-        </div>
-      -->
       <div class="form-group">
           <label for="clientid">Client:</label>
               <select class="form-control" value="clientid" name="clientid" id="clientid" required>
@@ -155,8 +130,8 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 
               <div class="form-group">
                 <input type="hidden" value="{{csrf_token()}}" name="_token"/>
-                  <label for="buildingid">Location:</label>
-                      <select class="form-control" value="buildingid" name="buildingid" >
+                  <label for="status">Status:</label>
+                      <select class="form-control" value="status" name="status" >
                             <option value="0">Requested</option>
                             <option value="1">Accepted</option>
                             <option value="2">Complete</option>
