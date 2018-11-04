@@ -21,7 +21,12 @@ Route::get('', function () {
     return view('landing');
 });
 
+Route::get('/submitted', function () {
+    return view('layouts.orderplaced');
+});
+
 Auth::routes();
+Route::get('calendar', 'EventController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -55,6 +60,9 @@ Route::get('/confirm/{id}', 'OrderController@approveOrder');
 //Account details update
 Route::get('/update/user/{id}', 'UserController@singleEdit');
 Route::post('/update/user/{id}', 'UserController@singleUpdate');
+
+Route::post('/schedule', 'OrderController@scheduleAppt');
+
 
 Route::get('/calculate', function () {
     return view('calculate');

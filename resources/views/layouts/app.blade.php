@@ -6,21 +6,19 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/bstrap.css') }}">
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-      </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js">
-      </script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+      @yield('style')
 
-      <!-- CSRF Token -->
-      <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>{{ ('Horse Braiding Scheduling') }}
       </title>
       <!-- Scripts -->
+
+      <!--
       <script src="{{ asset('js/app.js') }}" defer>
       </script>
+    -->
       <!-- Fonts -->
       <link rel="dns-prefetch" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -56,14 +54,19 @@
                 </li>
                 @else
                 <?php
-$id = Auth::user()->id;
-          if ($id == 1) {
-            ?>
+                $id = Auth::user()->type;
+          if ($id > 0) {
+              ?>
                 <li>
-                  <a class="nav-link" href="/home" class="dropdown-item">View Schedule
+                  <a class="nav-link" href="/home" class="dropdown-item">Appointments
                   </a>
+                </li>
+                <li>
+                  <a class="nav-link" href="/calendar" class="dropdown-item">Schedule
+                  </a>
+</li>
                   <?php
-              } ?>
+          } ?>
                 <li>
                   <a class="nav-link" href="/gallery">Gallery
                   </a>
@@ -81,6 +84,11 @@ $id = Auth::user()->id;
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a href="{{action('UserController@singleEdit', $id)}}" class="dropdown-item">Update Account
                     </a>
+                <?php if ($id > 0) {
+              ?>
+                  <a href="/admin" class="dropdown-item">Admin</a>
+        <?php
+          } ?>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -101,9 +109,6 @@ $id = Auth::user()->id;
         </main>
       </div>
       </div>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     </body>
   <div id="footer">
     © 2018
@@ -111,4 +116,6 @@ $id = Auth::user()->id;
     </strong>
   </div>
   </div>
-</html>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      @yield('script')
+  </html>
