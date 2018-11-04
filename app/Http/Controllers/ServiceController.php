@@ -14,7 +14,6 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //$users = User::where('id', auth()->user()->id)->get();
         $service = \DB::table('services')->oldest()->get();
         return view('crud.service.index', compact('service'));
     }

@@ -66,6 +66,25 @@ class OrderController extends Controller
         return redirect('/orders');
     }
 
+    public function scheduleAppt(Request $request)
+    {
+        $order = new Order([
+             'horsename'=> $request->get('horsename'),
+             'serviceid'=> $request->get('serviceid'),
+             'employeeid'=> $request->get('employeeid'),
+             'clientid'=> \Auth::user()->id,
+             'locationid'=> $request->get('locationid'),
+             'buildingid'=> $request->get('buildingid'),
+             'stablenumber'=> $request->get('stablenumber'),
+             'scheduledtime'=> $request->get('scheduledtime'),
+             'status'=> $request->get('status')
+         ]);
+
+        $order->save();
+        return redirect('/submitted');
+    }
+
+
     public function storeHome(Request $request)
     {
         $order = new Order([

@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = [
       'serviceid', 'employeeid', 'clientid', 'locationid', 'buildingid',
-      'stablenumber', 'horsename', 'comments'
+      'stablenumber', 'horsename', 'comments', 'scheduledtime'
   ];
 
     public function updateOrder($data)
@@ -23,6 +23,7 @@ class Order extends Model
         $order->locationid = $data['locationid'];
         $order->buildingid = $data['buildingid'];
         $order->stablenumber = $data['stablenumber'];
+        $order->scheduledtime = $data['scheduledtime'];
         $order->horsename = $data['horsename'];
         $order->comments = $data['comments'];
         $order->save();
@@ -41,6 +42,7 @@ class Order extends Model
     {
         $order = $this->find($data['id']);
         $order->serviceid = $data['serviceid'];
+        $order->scheduledtime = $data['scheduledtime'];
         $order->employeeid = $data['employeeid'];
         $order->clientid = $data['clientid'];
         $order->locationid = $data['locationid'];
