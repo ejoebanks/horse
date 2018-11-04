@@ -1,4 +1,4 @@
-<select required name="location" id="location" class="form-control">
+<select required name="locationid" id="locationid" class="form-control">
   <option value="">None</option>
   <?php
 
