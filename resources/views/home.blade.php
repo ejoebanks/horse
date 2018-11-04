@@ -142,8 +142,8 @@
 
           print "<ul class='list-group'>";
           print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
-          print "<li class='list-group-item'>$req_date </li>";
           print "<li class='list-group-item'>$horse </li>";
+          print "<li class='list-group-item'>$req_date </li>";
           print "<li class='list-group-item'> $servicename </li>";
           print "<li class='list-group-item'> $loc </li>";
           print "<li class='list-group-item'>$building </li>";
