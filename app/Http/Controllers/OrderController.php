@@ -132,7 +132,7 @@ class OrderController extends Controller
         $data['id'] = $id;
         $order->Updateorder($data);
 
-        return redirect('/order');
+        return redirect('/orders');
     }
 
 
@@ -141,7 +141,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->delete();
 
-        return redirect('/order');
+        return redirect('/orders');
     }
 
     public function singleDestroy($id)
