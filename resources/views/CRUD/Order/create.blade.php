@@ -106,7 +106,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 
             <div class="form-group">
               <input type="hidden" value="{{csrf_token()}}" name="_token"/>
-                <label for="buildingid">Location:</label>
+                <label for="buildingid">Building:</label>
                     <select class="form-control" value="buildingid" name="buildingid" >
                       <?php
                           $buildings = DB::table('buildings')

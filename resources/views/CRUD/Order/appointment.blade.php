@@ -64,7 +64,7 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
         </tbody>
     </table>
     <td><a href="{{action('OrderController@edit',$or->id)}}" class="btn btn-primary">Edit</a></td>
-  </div>
+  </div> 
   <div class="col-sm-3"></div>
 </div>
 
