@@ -115,7 +115,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::where('id', $id)
-                    ->join('services', 'services.id', '=', 'orders.serviceid')
+                    //->join('services', 'services.id', '=', 'orders.serviceid')
                     ->first();
 
 
@@ -201,7 +201,7 @@ class OrderController extends Controller
         ->where('orders.id', '=', $id)
         ->get();
 
-        return view('crud.order.appointment0', compact('order'));
+        return view('crud.order.appointment', compact('order'));
     }
 
     public function calendar()
