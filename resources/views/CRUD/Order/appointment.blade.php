@@ -26,6 +26,11 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
                         <td>{{$or->firstname}} {{ $or->lastname}}</td>
                     </tr>
                     <tr>
+                      <th>Horse Name</th>
+                        <td>{{ $or->horsename }}</td>
+                    </tr>
+
+                    <tr>
                       <th>Service Name</th>
                         <td>{{ $or->servname }}</td>
                     </tr>
@@ -58,6 +63,7 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
             @endforeach
         </tbody>
     </table>
+    <td><a href="{{action('OrderController@edit',$or->id)}}" class="btn btn-primary">Edit</a></td>
   </div>
   <div class="col-sm-3"></div>
 </div>
