@@ -27,9 +27,9 @@
     <div class="col-sm-4">
       <h2 class="mt-4">Contact Us</h2>
       <address>
-        <strong>Start Bootstrap</strong>
-        <br>3481 Melrose Place
-        <br>Beverly Hills, CA 90210
+        <strong>Customer Name</strong>
+        <br>123 Address Here
+        <br>City, State 11111
         <br>
       </address>
       <address>
@@ -48,7 +48,7 @@
       <div class="card">
         <img class="card-img-top" src="http://placehold.it/300x200" alt="">
         <div class="card-body">
-          <h4 class="card-title">Card title</h4>
+          <h4 class="card-title">About Us</h4>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.</p>
         </div>
         <div class="card-footer">
@@ -60,7 +60,7 @@
       <div class="card">
         <img class="card-img-top" src="http://placehold.it/300x200" alt="">
         <div class="card-body">
-          <h4 class="card-title">Card title</h4>
+          <h4 class="card-title">Gallery</h4>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.</p>
         </div>
         <div class="card-footer">
@@ -72,7 +72,7 @@
       <div class="card">
         <img class="card-img-top" src="http://placehold.it/300x200" alt="">
         <div class="card-body">
-          <h4 class="card-title">Card title</h4>
+          <h4 class="card-title">Contact Us</h4>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
         </div>
         <div class="card-footer">
