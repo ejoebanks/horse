@@ -56,6 +56,11 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
                         ?>
                           <td> <?php print "$req_date" ?> </td>
                       </tr>
+                      <tr>
+                        <th>Comments</th>
+                          <td>{{ $or->comments }}</td>
+                      </tr>
+
 
                 </tbody>
               </table>
@@ -64,7 +69,7 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
         </tbody>
     </table>
     <td><a href="{{action('OrderController@edit',$or->id)}}" class="btn btn-primary">Edit</a></td>
-  </div> 
+  </div>
   <div class="col-sm-3"></div>
 </div>
 
