@@ -3,6 +3,16 @@
   * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
+global.moment = require('moment');
+require('tempusdominus-bootstrap-4');
+import 'fullcalendar';
+import 'moment-timezone';
+import 'moment';
+import 'fullcalendar';
+import 'tempusdominus-bootstrap-4';
+import 'moment-timezone';
+
+
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
