@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use App\Order;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class OrderController extends Controller
 {
@@ -35,6 +36,8 @@ class OrderController extends Controller
 
         return view('crud.order.appointment', compact('order'));
     }
+
+
 
 
     /**
@@ -186,4 +189,45 @@ class OrderController extends Controller
         $order->save();
         return redirect('/home');
     }
+
+    public function view($id)
+    {
+        $order = \DB::table('orders')
+        ->join('services', 'services.id', '=', 'orders.serviceid')
+        ->join('locations', 'locations.id', '=', 'orders.locationid')
+        ->join('users', 'users.id', '=', 'orders.clientid')
+        ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
+        ->select('orders.*', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->where('orders.id', '=', $id)
+        ->get();
+
+        return view('crud.order.appointment0', compact('order'));
+    }
+
+    public function calendar()
+         {
+             $events = [];
+             //$data = Order::where('employeeid', \Auth::user()->id)->first();
+             $data = \DB::table('orders')
+                ->where('employeeid', Auth::user()->id)
+                ->get();
+             if($data->count()) {
+                 foreach ($data as $key => $value) {
+                     $events[] = Calendar::event(
+                         $value->horsename,
+                         true,
+                         new \DateTime($value->scheduledtime),
+                         new \DateTime($value->scheduledtime.' +1 day'),
+                         null,
+                      [
+                          'color' => '#17a2b8',
+                          'url' => action('OrderController@appointment', $value->id),
+                      ]
+                     );
+                 }
+             }
+             $cal = Calendar::addEvents($events);
+             return view('calendar', compact('cal'));
+         }
+
 }
