@@ -8,43 +8,32 @@
   <div class="row">
     <div class="col-sm-4">
       <h1>Requested Appointments</h1>
-<br/>
+      <br/>
         <?php
-        $requestQuery = DB::table('orders')
-                       ->leftjoin('users as employee', 'employee.id', '=', 'orders.employeeid')
-                       ->leftjoin('users as client', 'client.id', '=', 'orders.clientid')
-                       ->join('services', 'services.id', '=', 'orders.serviceid')
-                       ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-                       ->join('locations', 'locations.id', '=', 'orders.locationid')
-                       ->select('orders.*', 'employee.firstname as emp_fname', 'client.firstname as client_fname', 'client.lastname as client_lname', 'locations.*', 'services.*', 'buildings.buildingname')
-                       ->where('orders.employeeid', Auth::user()->id)
-                       ->get();
-
-        foreach ($requestQuery as $req){
-          if($req->status == 0){
-            $servicename = $req->servicename;
-            $client = $req->client_fname." ".$req->client_lname;
-            $loc = $req->address.", ".$req->city.", ".$req->state;
-            $stable = $req->stablenumber;
-            $building = $req->buildingname;
-            $time = $req->scheduledtime;
-            $horse = $req->horsename;
-            $date = new DateTime($time);
-            $req_date = date_format($date, "F j, Y, g:i a");
-            print "<ul class='list-group'>";
-            print "<li class='list-group-item list-group-item-warning' ><h4> $client </h4></li>";
-            print "<li class='list-group-item'>$horse </li>";
-            print "<li class='list-group-item'>$req_date </li>";
-            print "<li class='list-group-item'> $servicename </li>";
-            print "<li class='list-group-item'> $loc </li>";
-            print "<li class='list-group-item'>$building </li>";
-            print "<li class='list-group-item'>";
-            ?> <div class="container">
+        foreach ($requestQuery as $req) {
+            if ($req->status == 0) {
+                $servicename = $req->servicename;
+                $client = $req->client_fname." ".$req->client_lname;
+                $loc = $req->address.", ".$req->city.", ".$req->state;
+                $stable = $req->stablenumber;
+                $building = $req->buildingname;
+                $time = $req->scheduledtime;
+                $horse = $req->horsename;
+                $date = new DateTime($time);
+                $req_date = date_format($date, "F j, Y, g:i a");
+                print "<ul class='list-group'>";
+                print "<li class='list-group-item list-group-item-warning' ><h4> $client </h4></li>";
+                print "<li class='list-group-item'>$horse </li>";
+                print "<li class='list-group-item'>$req_date </li>";
+                print "<li class='list-group-item'> $servicename </li>";
+                print "<li class='list-group-item'> $loc </li>";
+                print "<li class='list-group-item'>$building </li>";
+                print "<li class='list-group-item'>"; ?> <div class="container">
                         <div class = "row">
-                          <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                          <a href="{{action('OrderController@appointment', $req->order_id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
                           <?php  echo str_repeat("&nbsp;", 3); ?>
 
-                          <a href="{{action('OrderController@approveOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
+                          <a href="{{action('OrderController@approveOrder', $req->order_id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
 
                           <?php  echo str_repeat("&nbsp;", 3); ?>
 
@@ -56,70 +45,56 @@
                         </div>
                       </div><?php
             print "</li>";
-            print "</ul>";
-          print "<br/>";
+                print "</ul>";
+                print "<br/>";
+            }
         }
-        }
-
-        $uid = Auth::user()->id;
-            $userQuery = DB::table('users')
-              ->where('users.id', '=', $uid)
-              ->select('users.*')
-              ->get();
-
-
-              $servicesQuery = DB::table('services')
-                ->select('services.*')
-                ->get();
  ?>
-
                     <div class="container">
                       <div class = "row">
                       </div>
                     </div>
     </div>
-
     <div class="col-sm-4">
       <div class="cliente">
         <h1> Accepted Appointments </h1>
         <br/>
         <?php
-        foreach ($requestQuery as $req){
-          if($req->status == 1){
-            $servicename = $req->servicename;
-            $client = $req->client_fname." ".$req->client_lname;
-            $loc = $req->address.", ".$req->city.", ".$req->state;
-            $stable = $req->stablenumber;
-            $horse = $req->horsename;
-            $building = $req->buildingname;
-            $time = $req->scheduledtime;
-            $date = new DateTime($time);
-            $req_date = date_format($date, "F j, Y, g:i a");
+        foreach ($requestQuery as $req) {
+            if ($req->status == 1) {
+                $servicename = $req->servicename;
+                $client = $req->client_fname." ".$req->client_lname;
+                $loc = $req->address.", ".$req->city.", ".$req->state;
+                $stable = $req->stablenumber;
+                $horse = $req->horsename;
+                $building = $req->buildingname;
+                $time = $req->scheduledtime;
+                $date = new DateTime($time);
+                $req_date = date_format($date, "F j, Y, g:i a");
 
-            print "<ul class='list-group'>";
-            print "<li class='list-group-item list-group-item-info' ><h4> $client </h4></li>";
-            print "<li class='list-group-item'>$horse </li>";
-            print "<li class='list-group-item'>$req_date </li>";
-            print "<li class='list-group-item'> $servicename </li>";
-            print "<li class='list-group-item'> $loc </li>";
-            print "<li class='list-group-item'>$building </li>";
-            print "<li class='list-group-item'>";
-            ?> <div class="container">
+                print "<ul class='list-group'>";
+                print "<li class='list-group-item list-group-item-info' ><h4> $client </h4></li>";
+                print "<li class='list-group-item'>$horse </li>";
+                print "<li class='list-group-item'>$req_date </li>";
+                print "<li class='list-group-item'> $servicename </li>";
+                print "<li class='list-group-item'> $loc </li>";
+                print "<li class='list-group-item'>$building </li>";
+                print "<li class='list-group-item'>"; ?> <div class="container">
                         <div class = "row">
-                          <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                          <a href="{{action('OrderController@appointment',$req->order_id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
                           <?php  echo str_repeat("&nbsp;", 3); ?>
 
                           <a href="" class="btn btn-outline-dark btn-sm">Request Change</a></td>
 
                           <?php  echo str_repeat("&nbsp;", 3); ?>
-                          <a href="{{action('OrderController@cancelOrder',$req->id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
+                          <a href="{{action('OrderController@cancelOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
                         </div>
                       </div><?php
             print "</li>";
-            print "</ul>";
-          print "<br/>";
-          print "<br/>";
-        }
+                print "</ul>";
+                print "<br/>";
+                print "<br/>";
+            }
         }
 ?>
         </div>
@@ -128,36 +103,35 @@
     <div class="col-sm-4"><h1>Completed Appointments</h1>
       <br/>
       <?php
-      foreach ($requestQuery as $req){
-        if($req->status == 2){
-          $servicename = $req->servicename;
-          $client = $req->client_fname." ".$req->client_lname;
-          $loc = $req->address.", ".$req->city.", ".$req->state;
-          $stable = $req->stablenumber;
-          $horse = $req->horsename;
-          $building = $req->buildingname;
-          $time = $req->scheduledtime;
-          $date = new DateTime($time);
-          $req_date = date_format($date, "F j, Y, g:i a");
+      foreach ($requestQuery as $req) {
+          if ($req->status == 2) {
+              $servicename = $req->servicename;
+              $client = $req->client_fname." ".$req->client_lname;
+              $loc = $req->address.", ".$req->city.", ".$req->state;
+              $stable = $req->stablenumber;
+              $horse = $req->horsename;
+              $building = $req->buildingname;
+              $time = $req->scheduledtime;
+              $date = new DateTime($time);
+              $req_date = date_format($date, "F j, Y, g:i a");
 
-          print "<ul class='list-group'>";
-          print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
-          print "<li class='list-group-item'>$horse </li>";
-          print "<li class='list-group-item'>$req_date </li>";
-          print "<li class='list-group-item'> $servicename </li>";
-          print "<li class='list-group-item'> $loc </li>";
-          print "<li class='list-group-item'>$building </li>";
-          print "<li class='list-group-item'>";
-          ?> <div class="container">
+              print "<ul class='list-group'>";
+              print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
+              print "<li class='list-group-item'>$horse </li>";
+              print "<li class='list-group-item'>$req_date </li>";
+              print "<li class='list-group-item'> $servicename </li>";
+              print "<li class='list-group-item'> $loc </li>";
+              print "<li class='list-group-item'>$building </li>";
+              print "<li class='list-group-item'>"; ?> <div class="container">
                       <div class = "row">
-                        <a href="{{action('OrderController@appointment',$req->id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
+                        <a href="{{action('OrderController@appointment',$req->order_id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
                       </div>
                     </div><?php
           print "</li>";
-          print "</ul>";
-        print "<br/>";
-        print "<br/>";
-      }
+              print "</ul>";
+              print "<br/>";
+              print "<br/>";
+          }
       }
 ?>
   </div>
