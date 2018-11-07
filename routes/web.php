@@ -28,7 +28,6 @@ Route::get('/submitted', function () {
 Auth::routes();
 Route::get('calendar', 'EventController@index');
 Route::get('/calendar', 'OrderController@calendar');
-Route::get('/calendar/{id}', 'OrderController@edit');
 
 
 
@@ -58,6 +57,8 @@ Route::resource('locations', 'LocationController');
 
 Route::get('/view/{id}', 'OrderController@appointment');
 Route::get('/calendar/{id}', 'OrderController@view');
+
+Route::get('/home', 'OrderController@homeList');
 
 Route::get('/deny/{id}', 'OrderController@cancelOrder');
 Route::get('/confirm/{id}', 'OrderController@approveOrder');

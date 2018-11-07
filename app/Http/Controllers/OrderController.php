@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use App\Order;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -17,28 +18,25 @@ class OrderController extends Controller
     {
         $order = \DB::table('orders')
         ->join('services', 'services.id', '=', 'orders.serviceid')
-        ->select('orders.*', 'services.servicename as servname', 'services.id as servid')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid')
         ->oldest()
         ->get();
         return view('crud.order.index', compact('order'));
     }
 
-    public function appointment($id)
+    public function appointment($order_id)
     {
         $order = \DB::table('orders')
         ->join('services', 'services.id', '=', 'orders.serviceid')
         ->join('locations', 'locations.id', '=', 'orders.locationid')
         ->join('users', 'users.id', '=', 'orders.clientid')
         ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-        ->select('orders.*', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
-        ->where('orders.id', '=', $id)
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->where('orders.id', '=', $order_id)
         ->get();
 
         return view('crud.order.appointment', compact('order'));
     }
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -87,7 +85,7 @@ class OrderController extends Controller
         return redirect('/submitted');
     }
 
-
+/*
     public function storeHome(Request $request)
     {
         $order = new Order([
@@ -99,9 +97,9 @@ class OrderController extends Controller
         $order->save();
         return redirect('/home');
     }
+*/
 
-
-    public function show($id)
+    public function show($order_id)
     {
         //
     }
@@ -109,50 +107,44 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $order_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($order_id)
     {
-        $order = Order::where('id', $id)
+        $order = Order::where('id', $order_id)
                     //->join('services', 'services.id', '=', 'orders.serviceid')
                     ->first();
 
-
-        return view('crud.order.edit', compact('order', 'id'));
+        return view('crud.order.edit', compact('order', 'order_id'));
     }
 
-    public function singleEdit($id)
+    public function singleEdit($order_id)
     {
-        $order = Order::where('id', $id)
+        $order = Order::where('id', $order_id)
                     ->first();
 
-        return view('crud.order.edits', compact('order', 'id'));
-    }
-
-    public function singleUpdate(Request $request, $id)
-    {
-        $order = new Order();
-        $data = $this->validate($request, [
-          'courseorder'=> 'required',
-        ]);
-        $data['id'] = $id;
-        $order->updatePersonal($data);
-
-        return redirect('/home');
+        return view('crud.order.edits', compact('order', 'order_id'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $order_id)
     {
-        $order = Order::find($id);
+        $order = Order::find($order_id);
         $data = $this->validate($request, [
-          'studentid'=>'required',
-          'courseid'=> 'required',
-          'courseorder'=> 'required',
+          'horsename'=> 'required',
+          'serviceid'=> 'required',
+          'employeeid'=> 'required',
+          'clientid'=> 'required',
+          'locationid'=> 'required',
+          'buildingid'=> 'required',
+          'stablenumber'=> 'required',
+          'scheduledtime'=> 'required',
+          'comments'=> 'required',
+          'status'=> 'required'
         ]);
-        $data['id'] = $id;
-        $order->Updateorder($data);
+        $data['id'] = $order_id;
+        $order->updateOrder($data);
 
         return redirect('/orders');
     }
@@ -174,31 +166,35 @@ class OrderController extends Controller
         return redirect('/home');
     }
 
-    public function approveOrder($id)
+    public function approveOrder($order_id)
     {
-        $order = Order::find($id);
-        $order->status = 1;
+        $order = Order::find($order_id);
+        if ($order->status == 0){
+          $order->status = 1;
+        }
         $order->save();
         return redirect('/home');
     }
 
-    public function cancelOrder($id)
+    public function cancelOrder($order_id)
     {
-        $order = Order::find($id);
-        $order->status = 0;
+        $order = Order::find($order_id);
+        if ($order->status == 1){
+          $order->status = 0;
+        }
         $order->save();
         return redirect('/home');
     }
 
-    public function view($id)
+    public function view($order_id)
     {
         $order = \DB::table('orders')
         ->join('services', 'services.id', '=', 'orders.serviceid')
         ->join('locations', 'locations.id', '=', 'orders.locationid')
         ->join('users', 'users.id', '=', 'orders.clientid')
         ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-        ->select('orders.*', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
-        ->where('orders.id', '=', $id)
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->where('orders.id', '=', $order_id)
         ->get();
 
         return view('crud.order.appointment', compact('order'));
@@ -210,6 +206,7 @@ class OrderController extends Controller
              //$data = Order::where('employeeid', \Auth::user()->id)->first();
              $data = \DB::table('orders')
                 ->where('employeeid', Auth::user()->id)
+                ->select('orders.*', 'orders.id as order_id')
                 ->get();
              if($data->count()) {
                  foreach ($data as $key => $value) {
@@ -221,7 +218,7 @@ class OrderController extends Controller
                          null,
                       [
                           'color' => '#17a2b8',
-                          'url' => action('OrderController@appointment', $value->id),
+                          'url' => action('OrderController@appointment', $value->order_id),
                       ]
                      );
                  }
@@ -229,5 +226,19 @@ class OrderController extends Controller
              $cal = Calendar::addEvents($events);
              return view('calendar', compact('cal'));
          }
+
+    public function homeList () {
+      $requestQuery = DB::table('orders')
+                     ->leftjoin('users as employee', 'employee.id', '=', 'orders.employeeid')
+                     ->leftjoin('users as client', 'client.id', '=', 'orders.clientid')
+                     ->join('services', 'services.id', '=', 'orders.serviceid')
+                     ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
+                     ->join('locations', 'locations.id', '=', 'orders.locationid')
+                     ->select('orders.*', 'orders.id as order_id', 'employee.firstname as emp_fname', 'client.firstname as client_fname', 'client.lastname as client_lname', 'locations.*', 'services.*', 'buildings.buildingname')
+                     ->where('orders.employeeid', \Auth::user()->id)
+                     ->get();
+
+              return view('home', compact('requestQuery'));
+    }
 
 }

@@ -2,16 +2,12 @@
 
 @section('content')
 <?php
-foreach($order as $ox){
-  $emp_id = $ox->employeeid;
-}
-if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_id) {
+if (Auth::user() != null && Auth::user()->type == 1) {
     ?>
     <div class="container">
       <div class="row">
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
-
       <table class="table table-striped">
         <thead>
             <tr>
@@ -51,24 +47,22 @@ if (Auth::user() != null && Auth::user()->type == 1 && Auth::user()->id == $emp_
                         <th>Requred Time</th>
                           <?php
                         $time = $or->scheduledtime;
-                        $date = new DateTime($time);
-                        $req_date = date_format($date, "F j, Y, g:i a");
-                        ?>
+    $date = new DateTime($time);
+    $req_date = date_format($date, "F j, Y, g:i a"); ?>
                           <td> <?php print "$req_date" ?> </td>
                       </tr>
                       <tr>
                         <th>Comments</th>
                           <td>{{ $or->comments }}</td>
                       </tr>
-
-
                 </tbody>
               </table>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <td><a href="{{action('OrderController@edit',$or->id)}}" class="btn btn-primary">Edit</a></td>
+    <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
+    <?php var_dump($or->id);?>
   </div>
   <div class="col-sm-3"></div>
 </div>

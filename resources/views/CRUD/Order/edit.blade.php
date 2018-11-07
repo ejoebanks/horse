@@ -17,7 +17,8 @@ if (Auth::user() != null && Auth::user()->type == 1) {
     <div class="container">
       <form class="form-horizontal" role="form" method="POST" action="{{ action('OrderController@update',$order->id) }}">
            {!! csrf_field() !!}
-
+           <?php var_dump($order_id);
+    var_dump($order->id); ?>
            <input type="hidden" name="_method" value="PATCH">
            <div class="form-group">
                <input type="hidden" value="{{csrf_token()}}" name="_token" />
@@ -35,14 +36,15 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 
                   <?php
                   $selected = "";
-                  foreach ($services as $service) {
-                    if ($service->id == $order->serviceid){
-                      $selected = "selected";
-                    } else {
-                      $selected = "";
-                    }?>
+    foreach ($services as $service) {
+        if ($service->id == $order->serviceid) {
+            $selected = "selected";
+        } else {
+            $selected = "";
+        } ?>
                         <option {{ $selected }} value="<?= $service->id ?>"><?= $service->servicename ?></option>
-                    <?php } ?>
+                    <?php
+    } ?>
 
             </select>
           </div>
@@ -58,15 +60,15 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                     <option value="">None</option>
               <?php
               foreach ($users as $uid) {
-                  if ($uid->id == $order->employeeid){
-                    $selected = "selected";
+                  if ($uid->id == $order->employeeid) {
+                      $selected = "selected";
                   } else {
-                    $selected = "";
-                  }?>
+                      $selected = "";
+                  } ?>
 
                     <option {{ $selected }} value="<?= $uid->id ?>"><?= $uid->firstname, " ".$uid->lastname ?></option>
                 <?php
-                      } ?>
+              } ?>
           </select>
         </div>
 
@@ -75,21 +77,23 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                 <select class="form-control" value="clientid" name="clientid" id="clientid" required>
                   <?php
                       $clients = DB::table('users')
-                        ->where('users.type', '=', '0')
+                        //->where('users.type', '=', '0')
                         ->distinct()
                         ->get(); ?>
                       <option value="">None</option>
 
-                <?php foreach ($clients as $client) {
-                  if ($client->id == $order->clientid){
-                    $selected = "selected";
-                  } else {
-                    $selected = "";
-                  }?>
-
+                <?php
+                $selected = "";
+    foreach ($clients as $client) {
+        if ($client->id == $order->clientid) {
+            $selected = "selected";
+        } else {
+            $selected = "";
+        } ?>
                       <option {{ $selected }} value="<?= $client->id ?>"><?= $client->firstname. " ".$client->lastname ?></option>
                   <?php
-                        } ?>
+    } ?>
+
             </select>
           </div>
               <div class="form-group">
@@ -102,11 +106,11 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                         <option value="">None</option>
 
                   <?php foreach ($locations as $loc) {
-                    if ($loc->id == $order->locationid){
-                      $selected = "selected";
-                    } else {
-                      $selected = "";
-                    }?>
+                              if ($loc->id == $order->locationid) {
+                                  $selected = "selected";
+                              } else {
+                                  $selected = "";
+                              } ?>
                         <option {{ $selected }} value="<?= $loc->id ?>"><?= $loc->address.", ".$loc->city.", ".$loc->state ?></option>
                     <?php
                           } ?>
@@ -122,11 +126,11 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                             ->get(); ?>
 
                     <?php foreach ($buildings as $bldg) {
-                      if ($bldg->id == $order->buildingid){
-                        $selected = "selected";
-                      } else {
-                        $selected = "";
-                      }?>
+                                if ($bldg->id == $order->buildingid) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                } ?>
                           <option {{ $selected }} value="<?= $bldg->id ?>"><?= $bldg->buildingname ?></option>
                       <?php
                             } ?>
@@ -137,6 +141,26 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                           <input class="form-control" value="{{ $order->stablenumber }}" name="stablenumber" id="stablenumber">
                       </select>
                     </div>
+                    <div class="form-group">
+                        <label for="scheduledtime">Scheduled Time:</label>
+                            <input class="form-control" value="{{ $order->scheduledtime }}" name="scheduledtime" id="scheduledtime">
+                        </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="comments">Comments:</label>
+                              <input class="form-control" value="{{ $order->comments }}" name="comments" id="comments">
+                          </select>
+                        </div>
+
+                      <div class="form-group">
+                          <label for="status">Status:</label>
+                              <input class="form-control" value="{{ $order->status }}" name="status" id="status">
+                        </div>
+
+                        <div>
+                            <label for="scheduledtime">Scheduled Date:</label>
+                            <input type="date" id="scheduledtime" name="scheduledtime">
+                        </div>
 
 
 
@@ -146,9 +170,9 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 </div>
 <?php
 } else {
-                                      ?>
+                                ?>
   @include('functions.denied')
 <?php
-                                  } ?>
+                            } ?>
 
 @endsection

@@ -25,6 +25,7 @@ class Order extends Model
         $order->stablenumber = $data['stablenumber'];
         $order->scheduledtime = $data['scheduledtime'];
         $order->horsename = $data['horsename'];
+        $order->status = $data['status'];
         $order->comments = $data['comments'];
         $order->save();
         return 1;

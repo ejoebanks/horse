@@ -31,7 +31,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                 <td>{{$or->buildingid}}</td>
                 <td>{{$or->stablenumber}}</td>
 
-                <td><a href="{{action('OrderController@edit',$or->id)}}" class="btn btn-primary">Edit</a></td>
+                <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
                 <td>
                     <form action="{{action('OrderController@destroy', $or->id)}}" method="post">
                     {{csrf_field()}}
