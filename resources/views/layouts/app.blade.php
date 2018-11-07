@@ -6,8 +6,6 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
       @yield('style')
 
@@ -15,12 +13,10 @@
       </title>
       <!-- Scripts -->
 
-      <!--
-      <script src="{{ asset('js/app.js') }}" defer>
+      <script src="{{ asset('js/app.js') }}" >
       </script>
-    -->
-    <script src="{{ asset('js/calendar.js') }}" defer>
-    </script>
+      <script src="{{ asset('js/calendar.js') }}" defer>
+      </script>
 
       <!-- Fonts -->
       <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -60,14 +56,14 @@
                 $id = Auth::user()->type;
           if ($id > 0) {
               ?>
-                <li>
-                  <a class="nav-link" href="/home" class="dropdown-item">Appointments
-                  </a>
-                </li>
-                <li>
-                  <a class="nav-link" href="/calendar" class="dropdown-item">Schedule
-                  </a>
-</li>
+              <li>
+                <a class="nav-link" href="/home" class="dropdown-item">Appointments
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="/calendar" class="dropdown-item">Schedule
+                </a>
+              </li>
                   <?php
           } ?>
                 <li>
@@ -119,6 +115,9 @@
     </strong>
   </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  -->
       @yield('script')
   </html>
