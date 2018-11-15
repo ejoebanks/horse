@@ -204,10 +204,18 @@ class OrderController extends Controller
          {
              $events = [];
              //$data = Order::where('employeeid', \Auth::user()->id)->first();
-             $data = \DB::table('orders')
-                ->where('employeeid', Auth::user()->id)
-                ->select('orders.*', 'orders.id as order_id')
-                ->get();
+
+             if(is_Object(Auth::user()) && Auth::user()->type == 1){
+               $data = \DB::table('orders')
+                  ->where('employeeid', Auth::user()->id)
+                  ->select('orders.*', 'orders.id as order_id')
+                  ->get();
+             } else {
+               $data = \DB::table('orders')
+                  ->where('employeeid', 1)
+                  ->select('orders.*', 'orders.id as order_id')
+                  ->get();
+             }
              if($data->count()) {
                  foreach ($data as $key => $value) {
                      $events[] = Calendar::event(
