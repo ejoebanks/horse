@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -85,19 +86,19 @@ class OrderController extends Controller
         return redirect('/submitted');
     }
 
-/*
-    public function storeHome(Request $request)
-    {
-        $order = new Order([
-             'studentid'=> $id = \Auth::user()->id,
-             'courseid'=> $request->get('courseid'),
-             'courseorder'=> $request->get('courseorder')
-         ]);
+    /*
+        public function storeHome(Request $request)
+        {
+            $order = new Order([
+                 'studentid'=> $id = \Auth::user()->id,
+                 'courseid'=> $request->get('courseid'),
+                 'courseorder'=> $request->get('courseorder')
+             ]);
 
-        $order->save();
-        return redirect('/home');
-    }
-*/
+            $order->save();
+            return redirect('/home');
+        }
+    */
 
     public function show($order_id)
     {
@@ -149,6 +150,13 @@ class OrderController extends Controller
         return redirect('/orders');
     }
 
+    public function updateDate($scheduledtime, $order_id)
+    {
+        $order = Order::find($order_id);
+        $order->scheduledtime = "11-11-1111";
+        $order->save();
+        return redirect('/orders');
+    }
 
     public function destroy($id)
     {
@@ -169,8 +177,8 @@ class OrderController extends Controller
     public function approveOrder($order_id)
     {
         $order = Order::find($order_id);
-        if ($order->status == 0){
-          $order->status = 1;
+        if ($order->status == 0) {
+            $order->status = 1;
         }
         $order->save();
         return redirect('/home');
@@ -179,8 +187,8 @@ class OrderController extends Controller
     public function cancelOrder($order_id)
     {
         $order = Order::find($order_id);
-        if ($order->status == 1){
-          $order->status = 0;
+        if ($order->status == 1) {
+            $order->status = 0;
         }
         $order->save();
         return redirect('/home');
@@ -201,42 +209,64 @@ class OrderController extends Controller
     }
 
     public function calendar()
-         {
-             $events = [];
-             //$data = Order::where('employeeid', \Auth::user()->id)->first();
+    {
+        $events = [];
+        //$data = Order::where('employeeid', \Auth::user()->id)->first();
 
-             if(is_Object(Auth::user()) && Auth::user()->type == 1){
-               $data = \DB::table('orders')
+        if (is_Object(Auth::user()) && Auth::user()->type == 1) {
+            $data = \DB::table('orders')
                   ->where('employeeid', Auth::user()->id)
                   ->select('orders.*', 'orders.id as order_id')
                   ->get();
-             } else {
-               $data = \DB::table('orders')
+        } else {
+            $data = \DB::table('orders')
                   ->where('employeeid', 1)
                   ->select('orders.*', 'orders.id as order_id')
                   ->get();
-             }
-             if($data->count()) {
-                 foreach ($data as $key => $value) {
-                     $events[] = Calendar::event(
+        }
+        if ($data->count()) {
+            foreach ($data as $key => $value) {
+                $events[] = Calendar::event(
                          $value->horsename,
-                         true,
+                         true, //Marks as full day
                          new \DateTime($value->scheduledtime),
                          new \DateTime($value->scheduledtime.' +1 day'),
-                         null,
+                         $value->id,
                       [
                           'color' => '#17a2b8',
                           'url' => action('OrderController@appointment', $value->order_id),
-                      ]
+                          'editable' => 'true',
+                                ]
                      );
-                 }
-             }
-             $cal = Calendar::addEvents($events);
-             return view('calendar', compact('cal'));
-         }
+            }
+        }
+        $cal = Calendar::addEvents($events)
+        ->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+        'eventDrop' => "function(event, delta, revertFunc) {
+                        alert(event.id + ' was dropped on ' + event.start.format());
+                        $.ajax({
+                            url: './change_date',
+                            type: 'POST',
+                            data: { 'scheduledtime': event.start.format(), 'order_id' : event.id },
+                            success: function(event,delta,revertFunc)
+                                        {
+                                            alert('ok');
+                                        }
 
-    public function homeList () {
-      $requestQuery = DB::table('orders')
+                        });
+
+                      }"
+    ]);
+
+        var_dump($events[1]->title);
+        var_dump($events[1]->start);
+        var_dump($events[1]->end);
+        return view('calendar', compact('cal'));
+    }
+
+    public function homeList()
+    {
+        $requestQuery = DB::table('orders')
                      ->leftjoin('users as employee', 'employee.id', '=', 'orders.employeeid')
                      ->leftjoin('users as client', 'client.id', '=', 'orders.clientid')
                      ->join('services', 'services.id', '=', 'orders.serviceid')
@@ -246,7 +276,6 @@ class OrderController extends Controller
                      ->where('orders.employeeid', \Auth::user()->id)
                      ->get();
 
-              return view('home', compact('requestQuery'));
+        return view('home', compact('requestQuery'));
     }
-
 }
