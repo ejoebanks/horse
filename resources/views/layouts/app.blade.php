@@ -81,7 +81,8 @@
                     </span>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a href="{{action('UserController@singleEdit', $id)}}" class="dropdown-item">Update Account
+                    <?php $uid = Auth::user()->id; ?>
+                    <a href="{{action('UserController@singleEdit', $uid)}}" class="dropdown-item">Update Account
                     </a>
                 <?php if ($id > 0) {
               ?>
