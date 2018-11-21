@@ -46,37 +46,37 @@
   <div class="row">
     <div class="col-sm-4 my-4">
       <div class="card">
-        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <img class="card-img-top" src="{{ asset('images/information.png') }}" alt="">
         <div class="card-body">
           <h4 class="card-title">About Us</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.</p>
+          <p class="card-text">You may know what we do from the above description, but click below to find out more about us directly.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Find Out More!</a>
+          <a href="#" class="btn btn-primary">Learn More</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4 my-4">
       <div class="card">
-        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <img class="card-img-top" src="{{ asset('images/gallery.png') }}" alt="">
         <div class="card-body">
           <h4 class="card-title">Gallery</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.</p>
+          <p class="card-text">Take a look at our gallery, which displays some of our work from our many clients.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Find Out More!</a>
+          <a href="#" class="btn btn-primary">View</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4 my-4">
       <div class="card">
-        <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+        <img class="card-img-top" src="{{ asset('images/contact.png') }}" alt="">
         <div class="card-body">
           <h4 class="card-title">Contact Us</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+          <p class="card-text">If you're having issues booking an appointment, have a special request, or need to get into contact, send us an e-mail.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Find Out More!</a>
+          <a href="#" class="btn btn-primary">Contact</a>
         </div>
       </div>
     </div>
