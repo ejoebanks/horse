@@ -29,8 +29,6 @@ Auth::routes();
 Route::get('/calendar', 'OrderController@calendar');
 Route::post('/calendar', 'OrderController@updateDate');
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('login', array(
