@@ -217,12 +217,14 @@ class OrderController extends Controller
         if (is_Object(Auth::user()) && Auth::user()->type == 1) {
             $data = \DB::table('orders')
                   ->where('employeeid', Auth::user()->id)
-                  ->select('orders.*', 'orders.id as order_id')
+                  ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
+                  ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
                   ->get();
         } else {
             $data = \DB::table('orders')
                   ->where('employeeid', 1)
-                  ->select('orders.*', 'orders.id as order_id')
+                  ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
+                  ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
                   ->get();
         }
         if ($data->count()) {
@@ -235,7 +237,7 @@ class OrderController extends Controller
                 $bg = '#bee5eb';
               }
                 $events[] = Calendar::event(
-                         $value->horsename,
+                         $value->horsename." @ ".$value->building,
                          true, //Marks as full day
                          new \DateTime($value->scheduledtime),
                          new \DateTime($value->scheduledtime.' +1 day'),

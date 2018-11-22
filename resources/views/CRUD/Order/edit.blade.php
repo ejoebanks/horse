@@ -17,8 +17,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
     <div class="container">
       <form class="form-horizontal" role="form" method="POST" action="{{ action('OrderController@update',$order->id) }}">
            {!! csrf_field() !!}
-           <?php var_dump($order_id);
-    var_dump($order->id); ?>
            <input type="hidden" name="_method" value="PATCH">
            <div class="form-group">
                <input type="hidden" value="{{csrf_token()}}" name="_token" />

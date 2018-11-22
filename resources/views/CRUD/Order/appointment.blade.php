@@ -47,8 +47,8 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                         <th>Requred Time</th>
                           <?php
                         $time = $or->scheduledtime;
-    $date = new DateTime($time);
-    $req_date = date_format($date, "F j, Y, g:i a"); ?>
+                        $date = new DateTime($time);
+                        $req_date = date_format($date, "F j, Y, g:i a"); ?>
                           <td> <?php print "$req_date" ?> </td>
                       </tr>
                       <tr>
@@ -62,7 +62,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         </tbody>
     </table>
     <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
-    <?php var_dump($or->id);?>
   </div>
   <div class="col-sm-3"></div>
 </div>
