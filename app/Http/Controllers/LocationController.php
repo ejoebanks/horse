@@ -60,7 +60,6 @@ class LocationController extends Controller
         $location = Location::where('id', $id)
                     ->first();
 
-
         return view('crud.locations.edit', compact('location', 'id'));
     }
 
