@@ -227,6 +227,13 @@ class OrderController extends Controller
         }
         if ($data->count()) {
             foreach ($data as $key => $value) {
+              if ( $value->status == 0){
+                $bg = '#ffeeba';
+              } else if ($value->status == 1) {
+                $bg = '#c3e6cb';
+              } else {
+                $bg = '#bee5eb';
+              }
                 $events[] = Calendar::event(
                          $value->horsename,
                          true, //Marks as full day
@@ -234,7 +241,8 @@ class OrderController extends Controller
                          new \DateTime($value->scheduledtime.' +1 day'),
                          $value->id,
                       [
-                          'color' => '#17a2b8',
+                          'color' => $bg,
+                          'textColor' => 'black',
                           'url' => action('OrderController@appointment', $value->order_id),
                           'editable' => 'true',
                                 ]
