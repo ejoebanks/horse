@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+.pt-4,.py-4{padding-top:0rem !important}
+</style>
 <header class="business-header">
   <div class="container">
     <div class="row">
