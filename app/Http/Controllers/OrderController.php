@@ -150,12 +150,13 @@ class OrderController extends Controller
         return redirect('/orders');
     }
 
-    public function updateDate($scheduledtime, $order_id)
+    public function updateDate(Request $request)
     {
+        $scheduledtime = $request->input('scheduledtime');
+        $order_id = $request->input('order_id');
         $order = Order::find($order_id);
-        $order->scheduledtime = "11-11-1111";
+        $order->scheduledtime = $scheduledtime;
         $order->save();
-        return redirect('/orders');
     }
 
     public function destroy($id)
@@ -243,24 +244,20 @@ class OrderController extends Controller
         $cal = Calendar::addEvents($events)
         ->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
         'eventDrop' => "function(event, delta, revertFunc) {
-                        alert(event.id + ' was dropped on ' + event.start.format());
+                    $(function() {
                         $.ajax({
-                            url: './change_date',
+                            url: '/calendar',
                             type: 'POST',
-                            data: { 'scheduledtime': event.start.format(), 'order_id' : event.id },
-                            success: function(event,delta,revertFunc)
-                                        {
-                                            alert('ok');
-                                        }
-
+                            data: {
+                              'method': 'POST',
+                              'scheduledtime': event.start.format(),
+                              'order_id' : event.id },
                         });
+                      });
+                    }"
 
-                      }"
     ]);
 
-        var_dump($events[1]->title);
-        var_dump($events[1]->start);
-        var_dump($events[1]->end);
         return view('calendar', compact('cal'));
     }
 
