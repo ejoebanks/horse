@@ -13370,3 +13370,12 @@ $.ajaxSetup({
            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        }
    });
+
+   $(document).ready(function(){
+  $("#example1").inputmask("99-9999999");
+  $("#example2").inputmask();
+});
+
+$( document ).ready(function() {
+  $('input[name="scheduledtime"]').mask('00/00/0000');
+});
