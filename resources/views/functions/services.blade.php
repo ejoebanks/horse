@@ -1,5 +1,5 @@
 <select required name="serviceid" id="serviceid" class="form-control">
-  <option value="">None</option>
+  <option value="">Service</option>
   <?php
 
       $services = DB::table('services')

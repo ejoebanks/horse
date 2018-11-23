@@ -1,5 +1,5 @@
 <select required name="buildingid" id="buildingid" class="form-control">
-  <option value="">None</option>
+  <option value="">Building</option>
   <?php
 
       $buildings = DB::table('buildings')

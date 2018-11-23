@@ -1,5 +1,5 @@
 <select required name="locationid" id="locationid" class="form-control">
-  <option value="">None</option>
+  <option value="">Location</option>
   <?php
 
       $RR = DB::table('locations')
