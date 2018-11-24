@@ -19,12 +19,13 @@
                 $building = $req->buildingname;
                 $time = $req->scheduledtime;
                 $horse = $req->horsename;
-                $date = new DateTime($time);
-                $req_date = date_format($date, "F j, Y, g:i a");
+                //$date = new DateTime($time);
+                //$req_date = date_format($date, "F j, Y, g:i a");
+
                 print "<ul class='list-group'>";
                 print "<li class='list-group-item list-group-item-warning' ><h4> $client </h4></li>";
                 print "<li class='list-group-item'>$horse </li>";
-                print "<li class='list-group-item'>$req_date </li>";
+                print "<li class='list-group-item'>$time </li>";
                 print "<li class='list-group-item'> $servicename </li>";
                 print "<li class='list-group-item'> $loc </li>";
                 print "<li class='list-group-item'>$building </li>";
@@ -69,13 +70,13 @@
                 $horse = $req->horsename;
                 $building = $req->buildingname;
                 $time = $req->scheduledtime;
-                $date = new DateTime($time);
-                $req_date = date_format($date, "F j, Y, g:i a");
+                //$date = new DateTime($time);
+                //$req_date = date_format($date, "F j, Y, g:i a");
 
                 print "<ul class='list-group'>";
                 print "<li class='list-group-item list-group-item-info' ><h4> $client </h4></li>";
                 print "<li class='list-group-item'>$horse </li>";
-                print "<li class='list-group-item'>$req_date </li>";
+                print "<li class='list-group-item'>$time </li>";
                 print "<li class='list-group-item'> $servicename </li>";
                 print "<li class='list-group-item'> $loc </li>";
                 print "<li class='list-group-item'>$building </li>";
@@ -112,13 +113,13 @@
               $horse = $req->horsename;
               $building = $req->buildingname;
               $time = $req->scheduledtime;
-              $date = new DateTime($time);
-              $req_date = date_format($date, "F j, Y, g:i a");
+              //$date = new DateTime($time);
+              //$req_date = date_format($date, "F j, Y, g:i a");
 
               print "<ul class='list-group'>";
               print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
               print "<li class='list-group-item'>$horse </li>";
-              print "<li class='list-group-item'>$req_date </li>";
+              print "<li class='list-group-item'>$time </li>";
               print "<li class='list-group-item'> $servicename </li>";
               print "<li class='list-group-item'> $loc </li>";
               print "<li class='list-group-item'>$building </li>";
