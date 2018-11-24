@@ -14,10 +14,12 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         </ul>
     </div><br />
 @endif
+<?php var_dump($order->id);
+?>
     <div class="container">
-      <form class="form-horizontal" role="form" method="POST" action="{{ action('OrderController@update',$order->id) }}">
+      <form class="form-horizontal" role="form" method="POST" action="{{ action('OrderController@reviseSubmit',$order->id) }}">
            {!! csrf_field() !!}
-           <input type="hidden" name="_method" value="PATCH">
+           <input type="hidden" name="_method" value="POST">
            <div class="form-group">
                <input type="hidden" value="{{csrf_token()}}" name="_token" />
                <label for="horsename">Horse Name:</label>
@@ -31,7 +33,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                     <?php  $services = \DB::table('services')
                                   ->select('services.*')
                                   ->get(); ?>
-
                   <?php
                   $selected = "";
     foreach ($services as $service) {
@@ -103,10 +104,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                           </select>
                         </div>
 
-                        <div>
-                            <label for="scheduledtime">Scheduled Date:</label>
-                            <input type="date" id="scheduledtime" name="scheduledtime">
-                        </div>
         <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

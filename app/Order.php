@@ -31,6 +31,21 @@ class Order extends Model
         return 1;
     }
 
+    public function reviseO($data)
+    {
+        $order = $this->find($data['id']);
+        $order->serviceid = $data['serviceid'];
+        $order->locationid = $data['locationid'];
+        $order->buildingid = $data['buildingid'];
+        $order->stablenumber = $data['stablenumber'];
+        $order->scheduledtime = $data['scheduledtime'];
+        $order->horsename = $data['horsename'];
+        $order->comments = $data['comments'];
+        $order->save();
+        return 1;
+    }
+
+
     public function denyOrder($data)
     {
         $order = $this->find($data['id']);

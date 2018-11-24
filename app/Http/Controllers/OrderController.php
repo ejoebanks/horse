@@ -25,6 +25,17 @@ class OrderController extends Controller
         return view('crud.order.index', compact('order'));
     }
 
+    public function listOrders()
+    {
+        $order = \DB::table('orders')
+        ->join('services', 'services.id', '=', 'orders.serviceid')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid')
+        ->where('orders.clientid', Auth::user()->id)
+        ->get();
+        return view('orders', compact('order'));
+    }
+
+
     public function appointment($order_id)
     {
         $order = \DB::table('orders')
@@ -149,6 +160,25 @@ class OrderController extends Controller
 
         return redirect('/orders');
     }
+
+    public function reviseSubmit(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $data = $this->validate($request, [
+          'horsename'=> 'required',
+          'serviceid'=> 'required',
+          'locationid'=> 'required',
+          'buildingid'=> 'required',
+          'stablenumber'=> 'required',
+          'scheduledtime'=> 'required',
+          'comments'=> 'required',
+        ]);
+        $data['id'] = $id;
+        $order->reviseO($data);
+
+        return redirect('/submitted');
+    }
+
 
     public function updateDate(Request $request)
     {
@@ -286,7 +316,7 @@ class OrderController extends Controller
         return view('home', compact('requestQuery'));
     }
 
-    public function reviseOrder($id)
+    public function reviseReview($id)
     {
         $order = Order::where('id', $id)
                     //->join('services', 'services.id', '=', 'orders.serviceid')
