@@ -59,8 +59,11 @@ Route::get('/view/{id}', 'OrderController@appointment');
 Route::get('/home', 'OrderController@homeList');
 
 // Order revision
-Route::get('/revise/{id}', 'OrderController@reviseOrder');
-Route::post('/revise/{id}', 'OrderController@reviseOrder');
+Route::get('/revise/{id}', 'OrderController@reviseReview');
+Route::post('/revise/{id}', 'OrderController@reviseSubmit');
+
+//Orders List page
+Route::get('/ordersummary', 'OrderController@listOrders');
 
 //Confirm or deny orders
 Route::get('/deny/{id}', 'OrderController@cancelOrder');
