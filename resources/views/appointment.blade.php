@@ -44,7 +44,7 @@
 			    <div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token"/>
-							<input id="scheduledtime" name="scheduledtime" type="text" placeholder="MM/DD/YYYY" required class="form-control input-md">
+							<input id="scheduledtime" name="scheduledtime" type="text" placeholder="YYYY-MM-DD" required class="form-control input-md">
 					</div>
 			    </div>
 					<div class="col-md-6">
