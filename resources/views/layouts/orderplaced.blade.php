@@ -8,11 +8,15 @@
     <div class="centerBlock">
       <h1 class="display-1">Order Placed</h1>
       <?php
-      $xx = \DB::table('orders')->latest()->where('orders.employeeid', Auth::user()->id)      ->join('buildings', 'orders.buildingid', '=', 'buildings.id')
-            ->join('locations', 'orders.locationid', '=', 'locations.id')
-            ->join('services', 'orders.serviceid', '=', 'services.id')->first();
-      var_dump($xx);
       $ccc = \DB::table('orders')
+            ->orderBy('orders.id', 'desc')
+            ->where('orders.employeeid', Auth::user()->id)
+            ->rightjoin('buildings', 'orders.buildingid', '=', 'buildings.id')
+            ->rightjoin('locations', 'orders.locationid', '=', 'locations.id')
+            ->rightjoin('services', 'orders.serviceid', '=', 'services.id')
+            ->select('orders.*', 'services.servicename', 'locations.city', 'locations.state', 'locations.address', 'buildings.buildingname')
+            ->first();
+      $xzx = \DB::table('orders')
       ->orderBy('orders.id', 'desc')
       ->join('buildings', 'orders.buildingid', '=', 'buildings.id')
       ->join('locations', 'orders.locationid', '=', 'locations.id')
@@ -28,11 +32,9 @@
       print "<li class='list-group-item'>Building<div class='float-right'>$ccc->buildingname</div><br>";
       print "<li class='list-group-item'>Service<div class='float-right'>$ccc->servicename</div><br>";
       print "</ul>";
-      var_dump($ccc);
       ?>
       <br/>
-      <button type="button" class="btn btn-outline-primary">Revise</button>
-    <a href="{{action('OrderController@reviseReview',$ccc->id)}}" class="btn btn-outline-dark btn-sm">Revise2</a></td>
+    <a href="{{action('OrderController@reviseReview',$ccc->id)}}" class="btn btn-outline-primary">Revise2</a></td>
 
     </div>
   </div>
