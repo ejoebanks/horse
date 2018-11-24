@@ -94,7 +94,6 @@
             print "</li>";
                 print "</ul>";
                 print "<br/>";
-                print "<br/>";
             }
         }
 ?>
