@@ -26,6 +26,7 @@ Route::get('/submitted', function () {
 });
 
 Auth::routes();
+
 Route::get('/calendar', 'OrderController@calendar');
 Route::post('/calendar', 'OrderController@updateDate');
 
@@ -57,6 +58,11 @@ Route::get('/view/{id}', 'OrderController@appointment');
 
 Route::get('/home', 'OrderController@homeList');
 
+// Order revision
+Route::get('/revise/{id}', 'OrderController@reviseOrder');
+Route::post('/revise/{id}', 'OrderController@reviseOrder');
+
+//Confirm or deny orders
 Route::get('/deny/{id}', 'OrderController@cancelOrder');
 Route::get('/confirm/{id}', 'OrderController@approveOrder');
 

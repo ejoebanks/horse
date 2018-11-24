@@ -285,4 +285,14 @@ class OrderController extends Controller
 
         return view('home', compact('requestQuery'));
     }
+
+    public function reviseOrder($id)
+    {
+        $order = Order::where('id', $id)
+                    //->join('services', 'services.id', '=', 'orders.serviceid')
+                    ->first();
+
+        return view('crud.order.revise', compact('order', 'id'));
+    }
+
 }

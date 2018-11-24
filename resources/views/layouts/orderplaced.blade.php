@@ -16,8 +16,9 @@
       ->join('services', 'orders.serviceid', '=', 'services.id')
       ->where('orders.employeeid', Auth::user()->id)
       ->first();
+
       print "<br/>";
-      print "<ul class='list-group'>";
+      print "<ul style='font-size:17px;' class='list-group'>";
       print "<li class='list-group-item'>Horse Name<div class='float-right'>$ccc->horsename</div><br>";
       print "</li>";
       print "<li class='list-group-item'>Location<div class='float-right'>$ccc->address, $ccc->city, $ccc->state</div><br>";
@@ -28,6 +29,7 @@
       ?>
       <br/>
       <button type="button" class="btn btn-outline-primary">Revise</button>
+    <a href="{{action('OrderController@reviseOrder',$ccc->id)}}" class="btn btn-outline-dark btn-sm">Revise2</a></td>
 
     </div>
   </div>
