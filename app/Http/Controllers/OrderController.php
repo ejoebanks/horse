@@ -29,7 +29,10 @@ class OrderController extends Controller
     {
         $order = \DB::table('orders')
         ->join('services', 'services.id', '=', 'orders.serviceid')
-        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid')
+        ->join('users', 'orders.employeeid', '=', 'users.id')
+        ->join('locations', 'orders.locationid', '=', 'locations.id')
+        ->join('buildings', 'orders.buildingid', '=', 'buildings.id')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'users.firstname', 'users.lastname', 'locations.address', 'locations.city', 'locations.state', 'buildings.buildingname')
         ->where('orders.clientid', Auth::user()->id)
         ->get();
         return view('orders', compact('order'));
@@ -324,5 +327,15 @@ class OrderController extends Controller
 
         return view('crud.order.revise', compact('order', 'id'));
     }
+
+    public function requestList()
+    {
+        $requestedAppts = DB::table('orders')
+                ->where('orders.employeeid', Auth::user()->id)
+                ->where('orders.status', 0)
+                ->count();
+          return view('layouts.app', compact('requestedAppts'));
+    }
+
 
 }
