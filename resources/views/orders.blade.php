@@ -8,12 +8,13 @@ if (Auth::user() != null) {
       <table class="table table-striped">
         <thead>
             <tr>
+              <td>Horse</td>
               <td>Service</td>
-              <td>Employee</td>
-              <td>Client</td>
               <td>Location</td>
               <td>Building</td>
               <td>Stable</td>
+              <td>Employee</td>
+              <td>Date</td>
 
               <td colspan="2">Action</td>
             </tr>
@@ -21,12 +22,14 @@ if (Auth::user() != null) {
         <tbody>
             @foreach($order as $or)
             <tr>
+                <td>{{$or->horsename}}</td>
                 <td>{{$or->servname}}</td>
-                <td>{{$or->employeeid}}</td>
-                <td>{{$or->clientid}}</td>
-                <td>{{$or->locationid}}</td>
-                <td>{{$or->buildingid}}</td>
+                <td>{{$or->address.", ".$or->city.", ".$or->state}}</td>
+                <td>{{$or->buildingname}}</td>
                 <td>{{$or->stablenumber}}</td>
+                <td>{{$or->firstname." ".$or->lastname}}</td>
+                <td>{{$or->scheduledtime}}</td>
+
 
                 <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
             </tr>

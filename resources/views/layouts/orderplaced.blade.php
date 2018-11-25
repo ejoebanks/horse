@@ -34,7 +34,7 @@
       print "</ul>";
       ?>
       <br/>
-    <a href="{{action('OrderController@reviseReview',$ccc->id)}}" class="btn btn-outline-primary">Revise2</a></td>
+    <a href="{{action('OrderController@reviseReview',$ccc->id)}}" class="btn btn-outline-primary">Revise</a></td>
 
     </div>
   </div>
