@@ -27,13 +27,14 @@
 
       <!-- Fonts -->
       <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
       <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
       <!-- Styles -->
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
       <div id="app">
-        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container">
             <a class="navbar-brand" href="/">IHBO</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,11 +43,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item home">
                   <a class="nav-link" href="/">
-                    <i class="fa fa-home"></i>
+                    <i class="fas fa-home fa-lg"></i>
                     Home
-                    <span class="sr-only">(current)</span>
+                    <span class="sr-only"></span>
                     </a>
                 </li>
                 <?php
@@ -55,7 +56,7 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/home">
-                    <i class="fa fa-envelope-o">
+                    <i class="fas fa-calendar-check fa-lg"></i>
                       <span class="badge badge-danger"><?php echo intval($requestedAppts); ?></span>
                     </i>
                     Appointments
@@ -64,8 +65,7 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/calendar">
-                    <i class="fa fa-calendar"></i>
-                    </i>
+                    <i class="fas fa-calendar-alt fa-lg"></i>
                     Calendar
                   </a>
                 </li>
@@ -74,8 +74,7 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="/gallery">
-                    <i class="fa fa-picture-o">
-                    </i>
+                    <i class="fas fa-images fa-lg"></i>
                     Gallery
                   </a>
                 </li>
@@ -84,19 +83,23 @@
                 <ul class="navbar-nav ml-auto">
                   <!-- Authentication Links -->
                   @guest
+
                   <li>
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}
+                    <a class="nav-link" href="{{ route('login') }}">
+                      <i class="fas fa-sign-in-alt fa-lg"></i>
+                      {{ __('Login') }}
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}
+                    <a class="nav-link" href="{{ route('register') }}">
+                      <i class="fas fa-user-plus fa-lg"></i>
+                      {{ __('Register') }}
                     </a>
                   </li>
                   @else
                   <li class="nav-item">
                     <a class="nav-link" href="/schedule">
-                      <i class="fa fa-external-link-square"></i>
-                      </i>
+                      <i class="fas fa-external-link-square-alt fa-lg"></i>
                       Place Order
                     </a>
                   </li>
