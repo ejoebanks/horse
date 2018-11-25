@@ -75,12 +75,6 @@ Route::post('/update/user/{id}', 'UserController@singleUpdate');
 
 Route::post('/schedule', 'OrderController@scheduleAppt');
 
-
-
-Route::get('/calculate', function () {
-    return view('calculate');
-});
-
 Route::get('/schedule', function () {
     return view('appointment');
 });
