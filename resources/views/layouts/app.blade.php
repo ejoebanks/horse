@@ -14,9 +14,9 @@
       </title>
       <!-- Scripts -->
       <?php
-      if(is_Object(Auth::user())){
-        $id = Auth::user()->type;
-        $requestedAppts = DB::table('orders')
+      if (is_Object(Auth::user())) {
+          $id = Auth::user()->type;
+          $requestedAppts = DB::table('orders')
            ->where('orders.employeeid', Auth::user()->id)
            ->where('orders.status', 0)
            ->count();
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <?php
-          if (isSet($id) && $id > 0) {
+          if (isset($id) && $id > 0) {
               ?>
 
                 <li class="nav-item">
@@ -63,13 +63,14 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="/home">
+                  <a class="nav-link" href="/calendar">
                     <i class="fa fa-calendar"></i>
                     </i>
                     Calendar
                   </a>
                 </li>
-              <?php } ?>
+              <?php
+          } ?>
 
                 <li class="nav-item">
                   <a class="nav-link" href="/gallery">
@@ -80,7 +81,6 @@
                 </li>
 
               </ul>
-              <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav ml-auto">
                   <!-- Authentication Links -->
                   @guest
@@ -116,10 +116,10 @@
                       <a href="{{action('UserController@singleEdit', $uid)}}" class="dropdown-item">Update Account
                       </a>
                   <?php if ($id > 0) {
-                ?>
+              ?>
                     <a href="/admin" class="dropdown-item">Admin</a>
           <?php
-            } ?>
+          } ?>
                       <a class="dropdown-item" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -132,7 +132,6 @@
                   </li>
                   @endguest
                 </ul>
-              </form>
             </div>
           </div>
         </nav>
