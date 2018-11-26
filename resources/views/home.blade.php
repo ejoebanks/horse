@@ -85,7 +85,7 @@
                           <a href="{{action('OrderController@appointment',$req->order_id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
                           <?php  echo str_repeat("&nbsp;", 3); ?>
 
-                          <a href="" class="btn btn-outline-dark btn-sm">Request Change</a></td>
+                          <a href="{{action('OrderController@completeOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Complete Order</a></td>
 
                           <?php  echo str_repeat("&nbsp;", 3); ?>
                           <a href="{{action('OrderController@cancelOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
@@ -112,8 +112,6 @@
               $horse = $req->horsename;
               $building = $req->buildingname;
               $time = $req->scheduledtime;
-              //$date = new DateTime($time);
-              //$req_date = date_format($date, "F j, Y, g:i a");
 
               print "<ul class='list-group'>";
               print "<li class='list-group-item list-group-item-success' ><h4> $client </h4></li>";
@@ -129,7 +127,6 @@
                     </div><?php
           print "</li>";
               print "</ul>";
-              print "<br/>";
               print "<br/>";
           }
       }

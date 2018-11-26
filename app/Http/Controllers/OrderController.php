@@ -228,6 +228,17 @@ class OrderController extends Controller
         return redirect('/home');
     }
 
+    public function completeOrder($order_id)
+    {
+        $order = Order::find($order_id);
+        if ($order->status == 1) {
+            $order->status = 2;
+        }
+        $order->save();
+        return redirect('/home');
+    }
+
+
     public function view($order_id)
     {
         $order = \DB::table('orders')
@@ -336,6 +347,4 @@ class OrderController extends Controller
                 ->count();
           return view('layouts.app', compact('requestedAppts'));
     }
-
-
 }
