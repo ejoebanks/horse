@@ -29,7 +29,7 @@
     <div class="col-sm-4">
       <h2 class="mt-4">Contact Us</h2>
       <address>
-        <strong>Customer Name</strong>
+        <strong>Kim Pevonka</strong>
         <br>123 Address Here
         <br>City, State 11111
         <br>
