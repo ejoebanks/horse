@@ -15,8 +15,8 @@ if (Auth::user() != null) {
               <td>Stable</td>
               <td>Employee</td>
               <td>Date</td>
-
-              <td colspan="2">Action</td>
+              <td>Status</td>
+              <td>Action</td>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +29,17 @@ if (Auth::user() != null) {
                 <td>{{$or->stablenumber}}</td>
                 <td>{{$or->firstname." ".$or->lastname}}</td>
                 <td>{{$or->scheduledtime}}</td>
-
-
-                <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
+                <?php if ($or->status ==0){
+                  $status = "Requested";
+                } else if ($or->status == 1){
+                  $status = "Pending";
+                } else {
+                  $status = "Complete";
+                }
+                ?>
+                <td>{{$status}}</td>
+                <td><?php if ($or->status == 0){ ?><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
+              <?php } ?>
             </tr>
             @endforeach
         </tbody>
