@@ -85,7 +85,7 @@
                           <a href="{{action('OrderController@appointment',$req->order_id)}}" class="btn btn-outline-dark btn-sm">View</a></td>
                           <?php  echo str_repeat("&nbsp;", 3); ?>
 
-                          <a href="{{action('OrderController@completeOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Complete Order</a></td>
+                          <a href="{{action('OrderController@completeOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Complete</a></td>
 
                           <?php  echo str_repeat("&nbsp;", 3); ?>
                           <a href="{{action('OrderController@cancelOrder',$req->order_id)}}" class="btn btn-outline-dark btn-sm">Cancel</a></td>
