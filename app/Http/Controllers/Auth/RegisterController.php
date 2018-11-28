@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Auth;
+use DB;
+Use App\Notifications\AppointmentReminder;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class RegisterController extends Controller
 {
@@ -67,7 +73,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'city' => $data['city'],
@@ -77,5 +84,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             //'type' => User::DEFAULT_TYPE,
         ]);
+        $sendTo = \App\User::find($user["id"]);
+        $sendTo->notify(new AppointmentReminder());
+        return $user;
     }
 }
