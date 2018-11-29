@@ -33,8 +33,10 @@ if (Auth::user() != null) {
                   $status = "Requested";
                 } else if ($or->status == 1){
                   $status = "Pending";
-                } else {
+                } else if ($or->status == 2) {
                   $status = "Complete";
+                } else {
+                  $status = "Rejected";
                 }
 /*
                 $today = new DateTime();
