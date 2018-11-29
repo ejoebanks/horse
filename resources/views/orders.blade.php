@@ -36,6 +36,14 @@ if (Auth::user() != null) {
                 } else {
                   $status = "Complete";
                 }
+/*
+                $today = new DateTime();
+                $date = new DateTime($or->scheduledtime);
+                $interval = $today->diff($date);
+                $final = $interval->days * 24 + $interval->h;
+                echo ($final);
+                echo "   ";
+*/
                 ?>
                 <td>{{$status}}</td>
                 <td><?php if ($or->status == 0){ ?><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
