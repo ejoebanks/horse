@@ -21,10 +21,11 @@ Route::get('', function () {
     return view('landing');
 });
 
-Route::get('/submitted', function () {
-    return view('layouts.orderplaced');
-});
 
+Route::get('/submitted', 'OrderController@lastOrder');
+Route::get('/tentative', function () {
+    return view('tentative');
+});
 Auth::routes();
 
 Route::get('/calendar', 'OrderController@calendar');
