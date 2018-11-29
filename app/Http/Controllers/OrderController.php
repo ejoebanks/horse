@@ -6,6 +6,8 @@ use Auth;
 use DB;
 use Illuminate\Http\Request;
 use App\Order;
+Use App\Notifications\OrderConfirmation;
+use Illuminate\Notifications\Notification;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class OrderController extends Controller
@@ -87,7 +89,7 @@ class OrderController extends Controller
         $order = new Order([
              'horsename'=> $request->get('horsename'),
              'serviceid'=> $request->get('serviceid'),
-             'employeeid'=> $request->get('employeeid'),
+             'employeeid'=> '1',
              'clientid'=> \Auth::user()->id,
              'locationid'=> $request->get('locationid'),
              'buildingid'=> $request->get('buildingid'),
@@ -98,6 +100,19 @@ class OrderController extends Controller
 
         $order->save();
         return redirect('/submitted');
+    }
+
+    public function lastOrder(){
+      $ccc = \DB::table('orders')
+            ->where('orders.clientid', Auth::user()->id)
+            ->orderBy('orders.id', 'desc')
+            ->rightjoin('buildings', 'orders.buildingid', '=', 'buildings.id')
+            ->rightjoin('locations', 'orders.locationid', '=', 'locations.id')
+            ->rightjoin('services', 'orders.serviceid', '=', 'services.id')
+            ->select('orders.*', 'services.servicename', 'locations.city', 'locations.state', 'locations.address', 'buildings.buildingname')
+            ->first();
+
+      return view('layouts.orderplaced', compact('ccc'));
     }
 
     /*
