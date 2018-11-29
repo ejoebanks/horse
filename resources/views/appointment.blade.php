@@ -41,13 +41,31 @@
 							@include('functions.services')
 					</div>
 			    </div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="hidden" value="{{csrf_token()}}" name="_token" />
+							<input id="color" name="color" type="text" placeholder="Color" class="form-control input-md">
+					</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="hidden" value="{{csrf_token()}}" name="_token" />
+							<select required name="tied" id="tied" class="form-control">
+								<option value="">Tie Horse?</option>
+							  <option value="0">No</option>
+								<option value="1">Yes</option>
+							</select>
+
+					</div>
+					</div>
+
 			    <div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token"/>
 							<input id="scheduledtime" name="scheduledtime" type="text" placeholder="Appointment Date YYYY-MM-DD" required class="form-control input-md">
 					</div>
 			    </div>
-					<div class="col-md-6">
+				<!--	<div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token" />
 							<label for="employeeid">Employee:</label>
@@ -68,7 +86,7 @@
 																													} ?>
 							</select>
 						</div>
-					</div>
+					</div>-->
 
 					<div class="col-md-12">
 						<div class="form-group">
