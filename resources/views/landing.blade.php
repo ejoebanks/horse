@@ -54,7 +54,7 @@
           <p class="card-text">You may know what we do from the above description, but click below to find out more about us directly.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Learn More</a>
+          <a href="/about" class="btn btn-primary">Learn More</a>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
           <p class="card-text">Take a look at our gallery, which displays some of our work from our many clients.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">View</a>
+          <a href="/gallery" class="btn btn-primary">View</a>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
           <p class="card-text">If you're having issues booking an appointment, have a special request, or need to get into contact, send us an e-mail.</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Contact</a>
+          <a href="/contact" class="btn btn-primary">Contact</a>
         </div>
       </div>
     </div>
