@@ -42,8 +42,8 @@ class AppointmentReminder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('You have an upcoming appointment.')
+                    ->action('View Appointment', url('/'))
                     ->line('Thank you for using our application!');
     }
 

@@ -3,6 +3,9 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use DB;
+use DateTime;
+Use App\Notifications\AppointmentReminder;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -24,8 +27,26 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+      $schedule->call(function () {
+        $today = new DateTime();
+        $order = \DB::table('orders')
+        ->select('orders.*')
+        ->oldest()
+        ->get();
+
+        foreach ($order as $obj){
+          $today = new DateTime();
+          $date = new Datetime($obj->scheduledtime);
+          $interval = $today->diff($date);
+          $final = $interval->days * 24 + $interval->h;
+
+          if ($final < 24){
+            $sendTo = \App\User::find($obj->clientid);
+            $sendTo->notify(new AppointmentReminder());
+          }
+        }
+    })->everyMinute();
+
     }
 
     /**
