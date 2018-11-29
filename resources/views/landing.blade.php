@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="display-3 text-center text-white mt-4">Horse Braiding</h1>
+        <h1 class="display-3 text-center text-white mt-4">Illinois Horse Braiding Online</h1>
       </div>
     </div>
   </div>
@@ -20,8 +20,8 @@
   <div class="row">
     <div class="col-sm-8">
       <h2 class="mt-4">What We Do</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+      <p>We are a team of horse braiders that will prepare your horse for shows and other events.  We offer various styles of braiding, requests, and more.  We work in locations across the midwest. </p>
+      <p>This website allows you to schedule an appointment for your horse(s), view and revise your requested appointments, and get into contact with your horse braider.</p>
       <p>
         <a class="btn btn-primary btn-lg" href="/schedule">Schedule Appointment &raquo;</a>
       </p>
