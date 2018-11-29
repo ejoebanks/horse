@@ -73,6 +73,8 @@ class OrderController extends Controller
              'serviceid'=> $request->get('serviceid'),
              'employeeid'=> $request->get('employeeid'),
              'clientid'=> $request->get('clientid'),
+             'tied'=> $request->get('tied'),
+             'color'=> $request->get('color'),
              'locationid'=> $request->get('locationid'),
              'buildingid'=> $request->get('buildingid'),
              'stablenumber'=> $request->get('stablenumber'),
@@ -92,6 +94,8 @@ class OrderController extends Controller
              'employeeid'=> '1',
              'clientid'=> \Auth::user()->id,
              'locationid'=> $request->get('locationid'),
+             'tied'=> $request->get('tied'),
+             'color'=> $request->get('color'),
              'buildingid'=> $request->get('buildingid'),
              'stablenumber'=> $request->get('stablenumber'),
              'scheduledtime'=> $request->get('scheduledtime'),
@@ -222,6 +226,17 @@ class OrderController extends Controller
 
         return redirect('/home');
     }
+
+    public function rejectOrder($order_id)
+    {
+        $order = Order::find($order_id);
+        if ($order->status == 0) {
+            $order->status = 3;
+        }
+        $order->save();
+        return redirect('/home');
+    }
+
 
     public function approveOrder($order_id)
     {

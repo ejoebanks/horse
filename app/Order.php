@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = [
       'serviceid', 'employeeid', 'clientid', 'locationid', 'buildingid',
-      'stablenumber', 'horsename', 'comments', 'scheduledtime'
+      'stablenumber', 'horsename', 'comments', 'scheduledtime', 'color', 'tied'
   ];
 
     public function updateOrder($data)
@@ -20,6 +20,8 @@ class Order extends Model
         $order->serviceid = $data['serviceid'];
         $order->employeeid = $data['employeeid'];
         $order->clientid = $data['clientid'];
+        $order->clientid = $data['color'];
+        $order->clientid = $data['tied'];
         $order->locationid = $data['locationid'];
         $order->buildingid = $data['buildingid'];
         $order->stablenumber = $data['stablenumber'];

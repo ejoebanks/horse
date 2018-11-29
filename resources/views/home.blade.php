@@ -37,12 +37,15 @@
                           <a href="{{action('OrderController@approveOrder', $req->order_id)}}" class="btn btn-outline-dark btn-sm">Confirm</a></td>
 
                           <?php  echo str_repeat("&nbsp;", 3); ?>
+                          <a href="{{action('OrderController@rejectOrder', $req->order_id)}}" onclick="return confirm('Are you sure?')" class="btn btn-outline-dark btn-sm">Reject</a></td>
 
+                          <!--
                           <form action="}" method="post">
                             {{csrf_field()}}
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-outline-dark btn-sm" onclick="return confirm('Are you sure?')" type="submit">Deny</button>
                           </form>
+                        -->
                         </div>
                       </div><?php
             print "</li>";

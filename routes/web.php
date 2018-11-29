@@ -67,6 +67,7 @@ Route::post('/revise/{id}', 'OrderController@reviseSubmit');
 Route::get('/ordersummary', 'OrderController@listOrders');
 
 //Confirm or deny orders
+Route::get('/reject/{id}', 'OrderController@rejectOrder');
 Route::get('/deny/{id}', 'OrderController@cancelOrder');
 Route::get('/confirm/{id}', 'OrderController@approveOrder');
 Route::get('/complete/{id}', 'OrderController@completeOrder');
