@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-if (Auth::user() != null && Auth::user()->type == 1) {
+if (Auth::user() != null && Auth::user()->id == $order->clientid) {
     ?>
 <div class="container">
 @if ($errors->any())
@@ -14,8 +14,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         </ul>
     </div><br />
 @endif
-<?php var_dump($order->id);
-?>
     <div class="container">
       <form class="form-horizontal" role="form" method="POST" action="{{ action('OrderController@reviseSubmit',$order->id) }}">
            {!! csrf_field() !!}
