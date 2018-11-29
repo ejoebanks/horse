@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<?php
+if (Auth::user() != null && Auth::user()->id == $ccc->clientid) {
+?>
 <div class="container">
 <div class="row">
   <div class="col-md-3"></div>
@@ -8,22 +11,6 @@
     <div class="centerBlock">
       <h1 class="display-1">Order Placed</h1>
       <?php
-      $ccc = \DB::table('orders')
-            ->orderBy('orders.id', 'desc')
-            ->where('orders.employeeid', Auth::user()->id)
-            ->rightjoin('buildings', 'orders.buildingid', '=', 'buildings.id')
-            ->rightjoin('locations', 'orders.locationid', '=', 'locations.id')
-            ->rightjoin('services', 'orders.serviceid', '=', 'services.id')
-            ->select('orders.*', 'services.servicename', 'locations.city', 'locations.state', 'locations.address', 'buildings.buildingname')
-            ->first();
-      $xzx = \DB::table('orders')
-      ->orderBy('orders.id', 'desc')
-      ->join('buildings', 'orders.buildingid', '=', 'buildings.id')
-      ->join('locations', 'orders.locationid', '=', 'locations.id')
-      ->join('services', 'orders.serviceid', '=', 'services.id')
-      ->where('orders.employeeid', Auth::user()->id)
-      ->first();
-
       print "<br/>";
       print "<ul style='font-size:17px;' class='list-group'>";
       print "<li class='list-group-item'>Horse Name<div class='float-right'>$ccc->horsename</div><br>";
@@ -40,5 +27,12 @@
   </div>
   <div class="col-md-3"></div>
 </div>
+<?php
+} else {
+    ?>
+  @include('functions.denied')
+<?php
+} ?>
+
 </div>
 @endsection
