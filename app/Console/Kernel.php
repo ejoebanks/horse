@@ -45,7 +45,7 @@ class Kernel extends ConsoleKernel
             $sendTo->notify(new AppointmentReminder());
           }
         }
-    })->everyMinute();
+    })->twiceDaily(1, 13);	
 
     }
 
