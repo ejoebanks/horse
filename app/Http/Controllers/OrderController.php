@@ -294,12 +294,16 @@ class OrderController extends Controller
                   ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
                   ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
                   ->get();
+
+            $editable = true;
         } else {
             $data = \DB::table('orders')
                   ->where('employeeid', 1)
                   ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
                   ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
                   ->get();
+            $editable = false;
+
         }
         if ($data->count()) {
             foreach ($data as $key => $value) {
@@ -320,7 +324,7 @@ class OrderController extends Controller
                           'color' => $bg,
                           'textColor' => 'black',
                           'url' => action('OrderController@appointment', $value->order_id),
-                          'editable' => 'true',
+                          'editable' => $editable,
                                 ]
                      );
             }
