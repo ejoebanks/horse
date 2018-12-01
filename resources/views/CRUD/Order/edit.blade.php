@@ -149,16 +149,26 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                               <input class="form-control" value="{{ $order->comments }}" name="comments" id="comments">
                           </select>
                         </div>
+                        <div class="form-group">
+                            <label for="color">Color:</label>
+                                <input class="form-control" value="{{ $order->color }}" name="color" id="color">
+                            </select>
+                          </div>
+                          <div class="form-group">
+                              <label for="tied">Tied:</label>
+                                  <select required name="tied" id="tied" class="form-control">
+                                    <option value="{{ $order->tied }}"></option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                  </select>
+                              </select>
+                            </div>
 
                       <div class="form-group">
                           <label for="status">Status:</label>
                               <input class="form-control" value="{{ $order->status }}" name="status" id="status">
                         </div>
 
-                        <div>
-                            <label for="scheduledtime">Scheduled Date:</label>
-                            <input type="date" id="scheduledtime" name="scheduledtime">
-                        </div>
 
 
 
