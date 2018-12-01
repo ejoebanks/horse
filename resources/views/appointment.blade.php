@@ -55,14 +55,13 @@
 							  <option value="0">No</option>
 								<option value="1">Yes</option>
 							</select>
-
 					</div>
 					</div>
 
 			    <div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token"/>
-							<input id="scheduledtime" name="scheduledtime" type="text" placeholder="Appointment Date YYYY-MM-DD" required class="form-control input-md">
+					    <input id="scheduledtime" name="scheduledtime" />
 					</div>
 			    </div>
 				<!--	<div class="col-md-6">

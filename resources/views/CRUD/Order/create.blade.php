@@ -127,6 +127,14 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                   <label for="stablenumber">Stable Number:</label>
                   <input type="number" class="form-control" name="stablenumber" />
               </div>
+              <div class="form-group">
+                  <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                  <label for="scheduledtime">Scheduled Time:</label>
+                  <input id="scheduledtime" name="scheduledtime" />
+              </div>
+
+
+
 
               <div class="form-group">
                 <input type="hidden" value="{{csrf_token()}}" name="_token"/>
