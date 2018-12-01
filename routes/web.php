@@ -17,6 +17,10 @@ Route::get('/gallery', function () {
     return view('gallery');
 });
 
+Route::get('/contact', 'ContactController@show');
+Route::post('/contact',  'ContactController@mailToAdmin');
+
+
 Route::get('', function () {
     return view('landing');
 });
