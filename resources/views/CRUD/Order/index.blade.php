@@ -17,7 +17,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
               <td>Building</td>
               <td>Stable</td>
 
-
               <td colspan="2">Action</td>
             </tr>
         </thead>
