@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-	<br/>
   <h2>Contact Us</h2>
 
   @if(session('message'))
