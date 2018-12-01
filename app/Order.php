@@ -20,8 +20,8 @@ class Order extends Model
         $order->serviceid = $data['serviceid'];
         $order->employeeid = $data['employeeid'];
         $order->clientid = $data['clientid'];
-        $order->clientid = $data['color'];
-        $order->clientid = $data['tied'];
+        $order->color = $data['color'];
+        $order->tied = $data['tied'];
         $order->locationid = $data['locationid'];
         $order->buildingid = $data['buildingid'];
         $order->stablenumber = $data['stablenumber'];
