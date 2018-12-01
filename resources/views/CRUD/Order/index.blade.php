@@ -9,6 +9,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
         <thead>
             <tr>
               <td>ID</td>
+              <td>Horse</td>
               <td>Service</td>
               <td>Employee</td>
               <td>Client</td>
@@ -24,6 +25,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
             @foreach($order as $or)
             <tr>
                 <td>{{$or->id}}</td>
+                <td>{{$or->horsename}}</td>
                 <td>{{$or->servname}}</td>
                 <td>{{$or->employeeid}}</td>
                 <td>{{$or->clientid}}</td>
