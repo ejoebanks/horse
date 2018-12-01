@@ -170,11 +170,13 @@ class OrderController extends Controller
           'serviceid'=> 'required',
           'employeeid'=> 'required',
           'clientid'=> 'required',
+          'color'=> 'required',
+          'tied'=> 'required',
           'locationid'=> 'required',
           'buildingid'=> 'required',
           'stablenumber'=> 'required',
           'scheduledtime'=> 'required',
-          'comments'=> 'required',
+          'comments'=> 'nullable',
           'status'=> 'required'
         ]);
         $data['id'] = $order_id;
