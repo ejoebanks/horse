@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-if (Auth::user() != null && Auth::user()->type == 1) {
-    ?>
     <div class="container">
       <div class="row">
   <div class="col-sm-3"></div>
@@ -67,13 +64,6 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 </div>
 
     <br/>
-    <?php
-} else {
-        ?>
-      @include('functions.denied')
-    <?php
-    } ?>
-
 
 <div>
 @endsection

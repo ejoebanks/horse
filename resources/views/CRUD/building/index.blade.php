@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-if (Auth::user() != null && Auth::user()->type == 1) {
-    ?>
     <div class="container">
       <table class="table table-striped">
         <thead>
@@ -37,13 +34,5 @@ if (Auth::user() != null && Auth::user()->type == 1) {
     </table>
     <br/>
     <a href="{{ action('BuildingController@create') }}" button type="submit" class="btn btn-primary">Insert New Building</button></a>
-    <?php
-} else {
-        ?>
-      @include('functions.denied')
-    <?php
-    } ?>
-
-
 <div>
 @endsection

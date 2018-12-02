@@ -2,9 +2,6 @@
 
 @section('content')
 <br/>
-<?php
-if (Auth::user() != null && Auth::user()->type == 1) {
-    ?>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4">
@@ -23,11 +20,5 @@ if (Auth::user() != null && Auth::user()->type == 1) {
       </div>
 
 </div>
-<?php
-} else {
-        ?>
-  @include('functions.denied')
-<?php
-    } ?>
 
 @endsection

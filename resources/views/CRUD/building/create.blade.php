@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-if (Auth::user() != null && Auth::user()->type == 1) {
-    ?>
 <div class="container">
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -36,15 +33,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
 
         <button type="submit" class="btn btn-primary">Create</button>
         </form>
-
-
     </div>
 </div>
-<?php
-} else {
-        ?>
-  @include('functions.denied')
-<?php
-    } ?>
 
 @endsection

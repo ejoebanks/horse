@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-if (Auth::user() != null && Auth::user()->type == 1) {
-    ?>
 <div class="container">
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -157,7 +154,7 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                           <div class="form-group">
                               <label for="tied">Tied:</label>
                                   <select required name="tied" id="tied" class="form-control">
-                                    <option value="{{ $order->tied }}"></option>
+                                    <option value="{{ $order->tied }}">{{ $order->tied }}</option>
                                     <option value="0">No</option>
                                     <option value="1">Yes</option>
                                   </select>
@@ -168,19 +165,9 @@ if (Auth::user() != null && Auth::user()->type == 1) {
                           <label for="status">Status:</label>
                               <input class="form-control" value="{{ $order->status }}" name="status" id="status">
                         </div>
-
-
-
-
         <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 </div>
-<?php
-} else {
-                                ?>
-  @include('functions.denied')
-<?php
-                            } ?>
 
 @endsection
