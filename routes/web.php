@@ -10,67 +10,89 @@
 |
 */
 Route::group(['middleware' => 'admin'], function () {
-  //Admin Page
-  Route::get('/admin', function () {
-      return view('admin.admin');
-  });
+    //Admin Page
+    Route::get('/admin', function () {
+        return view('admin.admin');
+    });
+
+    //CRUDS
+    Route::resource('users', 'UserController');
+    Route::resource('buildings', 'BuildingController');
+    Route::resource('services', 'ServiceController');
+    Route::resource('orders', 'OrderController');
+    Route::resource('locations', 'LocationController');
+
+    //Confirm or deny orders
+    Route::get('/reject/{id}', 'OrderController@rejectOrder');
+    Route::get('/deny/{id}', 'OrderController@cancelOrder');
+    Route::get('/confirm/{id}', 'OrderController@approveOrder');
+    Route::get('/complete/{id}', 'OrderController@completeOrder');
+
+    // Appointment list (requests, pending, complete)
+    Route::get('/home', 'OrderController@homeList');
+    Route::post('/calendar', 'OrderController@updateDate');
 });
 
 
-Route::group( ['middleware' => 'auth' ], function()
-{
+//Ensuring user is logged in
+Route::group(['middleware' => 'auth' ], function () {
+    //Orders List page
+    Route::get('/ordersummary', 'OrderController@listOrders');
 
-  //Orders List page
-  Route::get('/ordersummary', 'OrderController@listOrders');
+    //Order Placing
+    Route::post('/schedule', 'OrderController@scheduleAppt');
 
-  //Order Placing
-  Route::post('/schedule', 'OrderController@scheduleAppt');
+    Route::get('/schedule', function () {
+        return view('appointment');
+    });
 
-  Route::get('/schedule', function () {
-      return view('appointment');
-  });
+    //Account details update
+    Route::get('/update/user/{id}', 'UserController@singleEdit');
+    Route::post('/update/user/{id}', 'UserController@singleUpdate');
 
-  //Account details update
-  Route::get('/update/user/{id}', 'UserController@singleEdit');
-  Route::post('/update/user/{id}', 'UserController@singleUpdate');
+    //View Order
+    Route::get('/view/{id}', 'OrderController@appointment');
 
-  //View Order
-  Route::get('/view/{id}', 'OrderController@appointment');
+    //View Last Submitted Orders
+    Route::get('/submitted', 'OrderController@lastOrder');
 
-  //View Last Submitted Orders
-  Route::get('/submitted', 'OrderController@lastOrder');
+    // Order revision
+    Route::get('/revise/{id}', 'OrderController@reviseReview');
+    Route::post('/revise/{id}', 'OrderController@reviseSubmit');
 
+    // View Appointment
+    Route::get('/view/{id}', 'OrderController@appointment');
 });
 
-
+// Gallery
 Route::get('/gallery', function () {
     return view('gallery');
 });
 
+// Contact Form
 Route::get('/contact', 'ContactController@show');
-Route::post('/contact',  'ContactController@mailToAdmin');
+Route::post('/contact', 'ContactController@mailToAdmin');
 
-
+// Landing Page
 Route::get('', function () {
     return view('landing');
 });
 
-
+// Tentative Schedule
 Route::get('/tentative', function () {
     return view('tentative');
 });
+
 Auth::routes();
 
+// Calendar View
 Route::get('/calendar', 'OrderController@calendar');
-Route::post('/calendar', 'OrderController@updateDate');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+// Login Functions
 Route::get('login', array(
     'uses' => 'MainController@showLogin'
 ));
 
-// Route to process the form
 Route::post('login', array(
     'uses' => 'MainController@doLogin'
 ));
@@ -80,25 +102,3 @@ Route::get('logout', array(
 ));
 
 Auth::routes();
-
-//CRUDS
-Route::resource('users', 'UserController');
-Route::resource('buildings', 'BuildingController');
-Route::resource('services', 'ServiceController');
-Route::resource('orders', 'OrderController');
-Route::resource('locations', 'LocationController');
-
-Route::get('/view/{id}', 'OrderController@appointment');
-
-Route::get('/home', 'OrderController@homeList');
-
-// Order revision
-Route::get('/revise/{id}', 'OrderController@reviseReview');
-Route::post('/revise/{id}', 'OrderController@reviseSubmit');
-
-
-//Confirm or deny orders
-Route::get('/reject/{id}', 'OrderController@rejectOrder');
-Route::get('/deny/{id}', 'OrderController@cancelOrder');
-Route::get('/confirm/{id}', 'OrderController@approveOrder');
-Route::get('/complete/{id}', 'OrderController@completeOrder');
