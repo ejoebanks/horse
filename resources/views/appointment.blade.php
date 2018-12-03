@@ -91,7 +91,7 @@
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token" />
 							<label class="control-label" for="comments">Comments</label>
-							<textarea class="form-control" rows="5" id="comments"></textarea>
+							<textarea class="form-control" name="comments" rows="5" id="comments"></textarea>
 						</div>
 						<button type="submit" class="btn btn-default">Make Appointment</button>
 
