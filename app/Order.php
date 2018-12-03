@@ -38,6 +38,8 @@ class Order extends Model
         $order = $this->find($data['id']);
         $order->serviceid = $data['serviceid'];
         $order->locationid = $data['locationid'];
+        $order->color = $data['color'];
+        $order->tied = $data['tied'];
         $order->buildingid = $data['buildingid'];
         $order->stablenumber = $data['stablenumber'];
         $order->scheduledtime = $data['scheduledtime'];
