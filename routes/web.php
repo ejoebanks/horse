@@ -38,6 +38,7 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'auth' ], function () {
     //Orders List page
     Route::get('/ordersummary', 'OrderController@listOrders');
+    Route::post('/ordersummary', 'OrderController@reviseOrder');
 
     //Order Placing
     Route::post('/schedule', 'OrderController@scheduleAppt');
