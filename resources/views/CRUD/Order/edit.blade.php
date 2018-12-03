@@ -155,8 +155,8 @@
                               <label for="tied">Tied:</label>
                                   <select required name="tied" id="tied" class="form-control">
                                     <option value="{{ $order->tied }}">{{ $order->tied }}</option>
-                                    <option value="0">No</option>
                                     <option value="1">Yes</option>
+                                    <option value="0">No</option>
                                   </select>
                               </select>
                             </div>
