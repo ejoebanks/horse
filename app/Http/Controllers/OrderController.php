@@ -375,7 +375,19 @@ class OrderController extends Controller
                     //->join('services', 'services.id', '=', 'orders.serviceid')
                     ->first();
 
-        return view('crud.order.revise', compact('order', 'id'));
+          $RR = DB::table('locations')
+                ->select('locations.*')
+                ->orderBy('id', 'asc')
+                ->get();
+
+          $services = DB::table('services')
+                ->select('services.*')
+                ->orderBy('id', 'asc')
+                ->get();
+
+
+
+        return view('crud.order.revise', compact('order', 'id', 'RR', 'services'));
     }
 
     public function requestList()
