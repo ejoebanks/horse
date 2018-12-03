@@ -99,6 +99,7 @@ class OrderController extends Controller
              'buildingid'=> $request->get('buildingid'),
              'stablenumber'=> $request->get('stablenumber'),
              'scheduledtime'=> $request->get('scheduledtime'),
+             'comments'=> $request->get('comments'),
              'status'=> $request->get('status')
          ]);
 
@@ -170,7 +171,7 @@ class OrderController extends Controller
           'serviceid'=> 'required',
           'employeeid'=> 'required',
           'clientid'=> 'required',
-          'color'=> 'required',
+          'color'=> 'nullable',
           'tied'=> 'required',
           'locationid'=> 'required',
           'buildingid'=> 'required',
@@ -192,10 +193,12 @@ class OrderController extends Controller
           'horsename'=> 'required',
           'serviceid'=> 'required',
           'locationid'=> 'required',
+          'color'=> 'nullable',
+          'tied'=> 'required',
           'buildingid'=> 'required',
           'stablenumber'=> 'required',
           'scheduledtime'=> 'required',
-          'comments'=> 'required',
+          'comments'=> 'nullable',
         ]);
         $data['id'] = $id;
         $order->reviseO($data);
@@ -312,9 +315,9 @@ class OrderController extends Controller
               if ( $value->status == 0){
                 $bg = '#ffeeba';
               } else if ($value->status == 1) {
-                $bg = '#c3e6cb';
-              } else {
                 $bg = '#bee5eb';
+              } else {
+                $bg = '#c3e6cb';
               }
                 $events[] = Calendar::event(
                          $value->horsename." @ ".$value->building,
