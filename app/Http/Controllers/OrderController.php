@@ -111,10 +111,9 @@ class OrderController extends Controller
       $ccc = \DB::table('orders')
             ->where('orders.clientid', Auth::user()->id)
             ->orderBy('orders.id', 'desc')
-            ->rightjoin('buildings', 'orders.buildingid', '=', 'buildings.id')
             ->rightjoin('locations', 'orders.locationid', '=', 'locations.id')
             ->rightjoin('services', 'orders.serviceid', '=', 'services.id')
-            ->select('orders.*', 'services.servicename', 'locations.city', 'locations.state', 'locations.address', 'buildings.buildingname')
+            ->select('orders.*', 'services.servicename', 'locations.city', 'locations.state', 'locations.address')
             ->first();
 
       return view('layouts.orderplaced', compact('ccc'));
@@ -384,8 +383,6 @@ class OrderController extends Controller
                 ->select('services.*')
                 ->orderBy('id', 'asc')
                 ->get();
-
-
 
         return view('crud.order.revise', compact('order', 'id', 'RR', 'services'));
     }

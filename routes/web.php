@@ -48,8 +48,8 @@ Route::group(['middleware' => 'auth' ], function () {
     });
 
     //Account details update
-    Route::get('/update/user/{id}', 'UserController@singleEdit');
-    Route::post('/update/user/{id}', 'UserController@singleUpdate');
+    Route::get('/update/user/{id}', 'UserController@singleEdit')->middleware('check');
+    Route::post('/update/user/{id}', 'UserController@singleUpdate')->middleware('check');
 
     //View Order
     Route::get('/view/{id}', 'OrderController@appointment');
@@ -61,8 +61,6 @@ Route::group(['middleware' => 'auth' ], function () {
     Route::get('/revise/{id}', 'OrderController@reviseReview');
     Route::post('/revise/{id}', 'OrderController@reviseSubmit');
 
-    // View Appointment
-    Route::get('/view/{id}', 'OrderController@appointment');
 });
 
 // Gallery

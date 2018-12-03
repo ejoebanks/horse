@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-if (Auth::user() != null && Auth::user()->id == $ccc->clientid) {
+if (Auth::user()->id == $ccc->clientid) {
 ?>
 <div class="container">
 <div class="row">
@@ -16,7 +16,7 @@ if (Auth::user() != null && Auth::user()->id == $ccc->clientid) {
       print "<li class='list-group-item'>Horse Name<div class='float-right'>$ccc->horsename</div><br>";
       print "</li>";
       print "<li class='list-group-item'>Location<div class='float-right'>$ccc->address, $ccc->city, $ccc->state</div><br>";
-      print "<li class='list-group-item'>Building<div class='float-right'>$ccc->buildingname</div><br>";
+      print "<li class='list-group-item'>Building<div class='float-right'>$ccc->buildingid</div><br>";
       print "<li class='list-group-item'>Service<div class='float-right'>$ccc->servicename</div><br>";
       print "</ul>";
       ?>
