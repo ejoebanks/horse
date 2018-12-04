@@ -5,7 +5,9 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use DB;
 use DateTime;
-Use App\Notifications\AppointmentReminder;
+use DateTimeZone;
+use App\Order;
+use App\Notifications\AppointmentReminder;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -16,7 +18,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+      //
     ];
 
     /**
@@ -27,26 +29,33 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      $schedule->call(function () {
-        $today = new DateTime();
-        $order = \DB::table('orders')
-        ->select('orders.*')
-        ->oldest()
-        ->get();
+        $schedule->call(function () {
+            $today = new DateTime('today', new DateTimeZone('America/Chicago'));
+            $order = \DB::table('orders')
+                      ->select('orders.*')
+                      ->orderBy('scheduledtime', 'asc')
+                      ->get();
 
-        foreach ($order as $obj){
-          $today = new DateTime();
-          $date = new Datetime($obj->scheduledtime);
-          $interval = $today->diff($date);
-          $final = $interval->days * 24 + $interval->h;
+            foreach ($order as $obj) {
 
-          if ($final < 24){
-            $sendTo = \App\User::find($obj->clientid);
-            $sendTo->notify(new AppointmentReminder());
-          }
-        }
-    })->twiceDaily(1, 13);
+                // Check difference between now and appointment date
+                $date = new Datetime($obj->scheduledtime,
+                        new DateTimeZone('America/Chicago'));
+                $interval = $today->diff($date);
+                $final = $interval->days * 24 + $interval->h;
 
+                if ($final <= 24 && $obj->notified == 0) {
+                    // Send e-mail to the client
+                    $sendTo = \App\User::find($obj->clientid);
+                    $sendTo->notify(new AppointmentReminder());
+
+                    // Update order so e-mail doesn't get sent repeatedly
+                    $thisOrder = Order::find($obj->id);
+                    $thisOrder->notified = 1;
+                    $thisOrder->save();
+                }
+            }
+          })->twiceDaily(1, 13);
     }
 
     /**
