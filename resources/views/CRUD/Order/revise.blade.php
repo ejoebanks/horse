@@ -115,7 +115,7 @@ if (is_object($order) && Auth::user()->id == $order->clientid) {
     							<label class="control-label" for="comments">Comments</label>
     							<textarea class="form-control" name="comments" rows="5" id="comments">{{ $order->comments }}</textarea>
     						</div>
-    						<button type="submit" class="btn btn-default">Revise</button>
+    						<button type="submit" class="btn btn-default">Submit</button>
 
     					</div>
 
