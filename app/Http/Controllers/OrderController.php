@@ -158,6 +158,7 @@ class OrderController extends Controller
                         ->select('horsename', DB::raw('count(*) as total'))
                         ->groupBy('horsename')
                         ->first();
+                    $freqAlert = '';
                     if($horsename->total >= 3){
                       $freqHorse = $horsename->horsename;
                       $freqAlert =  "<div class='alert alert-success' role='alert'>Frequently used details have been added to the form</div>";
@@ -165,7 +166,7 @@ class OrderController extends Controller
                       $freqHorse = '';
                     }
 
-                    return view('appointment', compact('horsename', 'freqHorse', 'freqAlert'));
+              return view('appointment', compact('horsename', 'freqHorse', 'freqAlert'));
     }
 
 
