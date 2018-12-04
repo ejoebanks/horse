@@ -42,8 +42,8 @@ class NewUser extends Notification
     {
         return (new MailMessage)
                     ->line('Hello!  Welcome to IHBO.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->action('Visit Website', url('/'))
+                    ->line('Thank you for registering on IHBO!');
     }
 
     /**
