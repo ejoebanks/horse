@@ -41,11 +41,9 @@ Route::group(['middleware' => 'auth' ], function () {
     Route::post('/ordersummary', 'OrderController@reviseOrder');
 
     //Order Placing
+    Route::get('/schedule', 'OrderController@freqUsed');
     Route::post('/schedule', 'OrderController@scheduleAppt');
 
-    Route::get('/schedule', function () {
-        return view('appointment');
-    });
 
     //Account details update
     Route::get('/update/user/{id}', 'UserController@singleEdit')->middleware('check');
