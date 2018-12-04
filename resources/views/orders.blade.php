@@ -10,10 +10,10 @@ if (Auth::user() != null) {
             <tr>
               <td>Horse</td>
               <td>Service</td>
+              <td>Color</td>
               <td>Location</td>
               <td>Building</td>
               <td>Stable</td>
-              <td>Employee</td>
               <td>Date</td>
               <td>Status</td>
               <td>Action</td>
@@ -24,10 +24,10 @@ if (Auth::user() != null) {
             <tr>
                 <td>{{$or->horsename}}</td>
                 <td>{{$or->servname}}</td>
+                <td>{{$or->color}}</td>
                 <td>{{$or->address.", ".$or->city.", ".$or->state}}</td>
-                <td>{{$or->buildingname}}</td>
+                <td>{{$or->buildingid}}</td>
                 <td>{{$or->stablenumber}}</td>
-                <td>{{$or->firstname." ".$or->lastname}}</td>
                 <td>{{$or->scheduledtime}}</td>
                 <?php if ($or->status ==0){
                   $status = "Requested";
