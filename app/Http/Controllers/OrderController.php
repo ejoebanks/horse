@@ -153,14 +153,14 @@ class OrderController extends Controller
 
     public function freqUsed()
     {
-      $horsename = DB::table('orders')
+      $hName = DB::table('orders')
                         ->where('clientid', '=', Auth::user()->id)
                         ->select('horsename', DB::raw('count(*) as total'))
                         ->groupBy('horsename')
                         ->first();
                     $freqAlert = '';
-                    if($horsename->total >= 3){
-                      $freqHorse = $horsename->horsename;
+                    if(is_object($hName) && $hName->total >= 3){
+                      $freqHorse = $hName->horsename;
                       $freqAlert =  "<div class='alert alert-success' role='alert'>Frequently used details have been added to the form</div>";
                     } else {
                       $freqHorse = '';
