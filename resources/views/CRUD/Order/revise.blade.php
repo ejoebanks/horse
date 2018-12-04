@@ -91,6 +91,7 @@ if (is_object($order) && Auth::user()->id == $order->clientid) {
     						<div class="form-group">
     							<input type="hidden" value="{{csrf_token()}}" name="_token" />
     							<select required name="tied" id="tied" class="form-control">
+                    <option value="">Tie Horse?</option>
                   <?php if ($order->tied == 1){?>
                     <option selected value="1">Yes</option>
                     <option value="0">No</option>
