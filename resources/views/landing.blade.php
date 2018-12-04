@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-sm-8">
       <h2 class="mt-4">What We Do</h2>
-      <p>We are a team of horse braiders that will prepare your horse for shows and other events.  We offer various styles of braiding, requests, and more.  We work in locations across the midwest. </p>
+      <p>At IHBO, Illinois Horse Braiding Online, we are a team of horse braiders that will prepare your horse for shows and other events.  We offer various styles of braiding, requests, and more.  We work in locations across the midwest. </p>
       <p>This website allows you to schedule an appointment for your horse(s), view and revise your requested appointments, and get into contact with your horse braider.</p>
       <p>
         <a class="btn btn-primary btn-lg" href="/schedule">Schedule Appointment &raquo;</a>
