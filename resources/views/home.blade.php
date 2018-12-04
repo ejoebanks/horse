@@ -16,7 +16,7 @@
                 $client = $req->client_fname." ".$req->client_lname;
                 $loc = $req->address.", ".$req->city.", ".$req->state;
                 $stable = $req->stablenumber;
-                $building = $req->buildingname;
+                $building = $req->buildingid;
                 $time = $req->scheduledtime;
                 $horse = $req->horsename;
                 //$date = new DateTime($time);
@@ -71,7 +71,7 @@
                 $loc = $req->address.", ".$req->city.", ".$req->state;
                 $stable = $req->stablenumber;
                 $horse = $req->horsename;
-                $building = $req->buildingname;
+                $building = $req->buildingid;
                 $time = $req->scheduledtime;
                 //$date = new DateTime($time);
                 //$req_date = date_format($date, "F j, Y, g:i a");
@@ -113,7 +113,7 @@
               $loc = $req->address.", ".$req->city.", ".$req->state;
               $stable = $req->stablenumber;
               $horse = $req->horsename;
-              $building = $req->buildingname;
+              $building = $req->buildingid;
               $time = $req->scheduledtime;
 
               print "<ul class='list-group'>";
