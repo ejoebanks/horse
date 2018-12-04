@@ -9,12 +9,13 @@
     <div class="col">
     </div>
     <div class="col-md-6">
+			<?= $freqAlert ?>
 			<form method="post" action="{{ action('OrderController@scheduleAppt') }}">
 			  <div class="row">
 			    <div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token" />
-							<input id="horsename" name="horsename" type="text" placeholder="Horse Name" class="form-control input-md" required />
+							<input id="horsename" value="{{ $freqHorse }}" name="horsename" type="text" placeholder="Horse Name" class="form-control input-md" required />
 					</div>
 			    </div>
 			    <div class="col-md-6">
@@ -26,7 +27,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<input type="hidden" value="{{csrf_token()}}" name="_token" />
-							@include('functions.buildings')
+							<input id="buildingid" name="buildingid" type="text" placeholder="Building" class="form-control input-md">
 					</div>
 					</div>
 					<div class="col-md-6">
@@ -52,8 +53,8 @@
 							<input type="hidden" value="{{csrf_token()}}" name="_token" />
 							<select required name="tied" id="tied" class="form-control">
 								<option value="">Tie Horse?</option>
-							  <option value="0">No</option>
 								<option value="1">Yes</option>
+							  <option value="0">No</option>
 							</select>
 					</div>
 					</div>

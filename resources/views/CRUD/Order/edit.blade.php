@@ -114,22 +114,7 @@
 
                 <div class="form-group">
                     <label for="buildingid">Building:</label>
-                    <select class="form-control" value="buildingid" name="buildingid" >
-                      <?php
-                          $buildings = DB::table('buildings')
-                            ->distinct()
-                            ->get(); ?>
-
-                    <?php foreach ($buildings as $bldg) {
-                                if ($bldg->id == $order->buildingid) {
-                                    $selected = "selected";
-                                } else {
-                                    $selected = "";
-                                } ?>
-                          <option {{ $selected }} value="<?= $bldg->id ?>"><?= $bldg->buildingname ?></option>
-                      <?php
-                            } ?>
-                </select>
+                    <input id="buildingid" name="buildingid" value="{{ $order->buildingid }}"type="text" placeholder="Building" class="form-control input-md">
               </div>
                   <div class="form-group">
                       <label for="stablenumber">Stable:</label>

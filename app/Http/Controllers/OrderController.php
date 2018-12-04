@@ -33,8 +33,7 @@ class OrderController extends Controller
         ->join('services', 'services.id', '=', 'orders.serviceid')
         ->join('users', 'orders.employeeid', '=', 'users.id')
         ->join('locations', 'orders.locationid', '=', 'locations.id')
-        ->join('buildings', 'orders.buildingid', '=', 'buildings.id')
-        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'users.firstname', 'users.lastname', 'locations.address', 'locations.city', 'locations.state', 'buildings.buildingname')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'users.firstname', 'users.lastname', 'locations.address', 'locations.city', 'locations.state')
         ->where('orders.clientid', Auth::user()->id)
         ->get();
         return view('orders', compact('order'));
@@ -47,8 +46,7 @@ class OrderController extends Controller
         ->join('services', 'services.id', '=', 'orders.serviceid')
         ->join('locations', 'locations.id', '=', 'orders.locationid')
         ->join('users', 'users.id', '=', 'orders.clientid')
-        ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname')
         ->where('orders.id', '=', $order_id)
         ->get();
 
@@ -152,6 +150,26 @@ class OrderController extends Controller
 
         return view('crud.order.edit', compact('order', 'order_id'));
     }
+
+    public function freqUsed()
+    {
+      $horsename = DB::table('orders')
+                        ->where('clientid', '=', Auth::user()->id)
+                        ->select('horsename', DB::raw('count(*) as total'))
+                        ->groupBy('horsename')
+                        ->first();
+                    if($horsename->total >= 3){
+                      $freqHorse = $horsename->horsename;
+                      $freqAlert =  "<div class='alert alert-success' role='alert'>Frequently used details have been added to the form</div>";
+                    } else {
+                      $freqHorse = '';
+                    }
+
+                    return view('appointment', compact('horsename', 'freqHorse', 'freqAlert'));
+    }
+
+
+
 
     public function singleEdit($order_id)
     {
@@ -279,8 +297,7 @@ class OrderController extends Controller
         ->join('services', 'services.id', '=', 'orders.serviceid')
         ->join('locations', 'locations.id', '=', 'orders.locationid')
         ->join('users', 'users.id', '=', 'orders.clientid')
-        ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname', 'buildings.buildingname')
+        ->select('orders.*', 'orders.id as order_id', 'services.servicename as servname', 'services.id as servid', 'locations.*', 'users.firstname', 'users.lastname')
         ->where('orders.id', '=', $order_id)
         ->get();
 
@@ -295,16 +312,14 @@ class OrderController extends Controller
         if (is_Object(Auth::user()) && Auth::user()->type == 1) {
             $data = \DB::table('orders')
                   ->where('employeeid', Auth::user()->id)
-                  ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-                  ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
+                  ->select('orders.*', 'orders.id as order_id')
                   ->get();
 
             $editable = true;
         } else {
             $data = \DB::table('orders')
                   ->where('employeeid', 1)
-                  ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
-                  ->select('orders.*', 'buildings.buildingname AS building', 'orders.id as order_id')
+                  ->select('orders.*', 'orders.id as order_id')
                   ->get();
             $editable = false;
 
@@ -319,7 +334,7 @@ class OrderController extends Controller
                 $bg = '#c3e6cb';
               }
                 $events[] = Calendar::event(
-                         $value->horsename." @ ".$value->building,
+                         $value->horsename." @ ".$value->buildingid,
                          true, //Marks as full day
                          new \DateTime($value->scheduledtime),
                          new \DateTime($value->scheduledtime.' +1 day'),
@@ -359,9 +374,8 @@ class OrderController extends Controller
                      ->leftjoin('users as employee', 'employee.id', '=', 'orders.employeeid')
                      ->leftjoin('users as client', 'client.id', '=', 'orders.clientid')
                      ->join('services', 'services.id', '=', 'orders.serviceid')
-                     ->join('buildings', 'buildings.id', '=', 'orders.buildingid')
                      ->join('locations', 'locations.id', '=', 'orders.locationid')
-                     ->select('orders.*', 'orders.id as order_id', 'employee.firstname as emp_fname', 'client.firstname as client_fname', 'client.lastname as client_lname', 'locations.*', 'services.*', 'buildings.buildingname')
+                     ->select('orders.*', 'orders.id as order_id', 'employee.firstname as emp_fname', 'client.firstname as client_fname', 'client.lastname as client_lname', 'locations.*', 'services.*')
                      ->where('orders.employeeid', \Auth::user()->id)
                      ->get();
 

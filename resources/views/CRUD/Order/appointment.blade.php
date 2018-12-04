@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <th>Building</th>
-                          <td>{{ $or->buildingname}}</td>
+                          <td>{{ $or->buildingid}}</td>
                       </tr>
                       <tr>
                         <th>Stable Number</th>
@@ -41,12 +41,8 @@
                       </tr>
 
                       <tr>
-                        <th>Requred Time</th>
-                          <?php
-                        $time = $or->scheduledtime;
-                        $date = new DateTime($time);
-                        $req_date = date_format($date, "F j, Y, g:i a"); ?>
-                          <td> <?php print "$req_date" ?> </td>
+                        <th>Requested Date</th>
+                        <td>{{ $or->scheduledtime }}</td>
                       </tr>
                       <tr>
                         <th>Comments</th>
