@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Auth;
 use DB;
+Use App\Notifications\NewUser;
 Use App\Notifications\AppointmentReminder;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -84,7 +85,7 @@ class RegisterController extends Controller
             //'type' => User::DEFAULT_TYPE,
         ]);
         $sendTo = \App\User::find($user["id"]);
-        $sendTo->notify(new AppointmentReminder());
+        $sendTo->notify(new NewUser());
         return $user;
     }
 }
