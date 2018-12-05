@@ -13373,6 +13373,7 @@ $.ajaxSetup({
 
 $( document ).ready(function() {
   $('#scheduledtime').datepicker({
+      format: 'yyyy-mm-dd',
       uiLibrary: 'bootstrap4'
   });
 });
