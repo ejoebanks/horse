@@ -54,7 +54,9 @@
             @endforeach
         </tbody>
     </table>
-    <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
+    <?php if (Auth::user()->type == 1){?>
+      <td><a href="{{action('OrderController@edit',$or->order_id)}}" class="btn btn-primary">Edit</a></td>
+    <?php } ?>
   </div>
   <div class="col-sm-3"></div>
 </div>
