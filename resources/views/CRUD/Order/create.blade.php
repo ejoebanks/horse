@@ -104,19 +104,7 @@
             <div class="form-group">
               <input type="hidden" value="{{csrf_token()}}" name="_token"/>
                 <label for="buildingid">Building:</label>
-                    <select class="form-control" value="buildingid" name="buildingid" >
-                      <?php
-                          $buildings = DB::table('buildings')
-                            ->distinct()
-                            ->get(); ?>
-                          <option value="">None</option>
-
-                    <?php foreach ($buildings as $bldg) {
-                                ?>
-                          <option value="<?= $bldg->id ?>"><?= $bldg->buildingname ?></option>
-                      <?php
-                            } ?>
-                </select>
+                  <input type="text" class="form-control" name="buildingid" />
               </div>
 
               <div class="form-group">
