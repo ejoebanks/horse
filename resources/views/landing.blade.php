@@ -49,11 +49,11 @@
       <div class="card">
         <img class="card-img-top" src="{{ asset('images/information.png') }}" alt="">
         <div class="card-body">
-          <h4 class="card-title">About Us</h4>
-          <p class="card-text">You may know what we do from the above description, but click below to find out more about us directly.</p>
+          <h4 class="card-title">Schedule</h4>
+          <p class="card-text">If you're interested in making an appointment, take a look at my schedule to see what is open.</p>
         </div>
         <div class="card-footer">
-          <a href="/about" class="btn btn-primary">Learn More</a>
+          <a href="/calendar" class="btn btn-primary">View</a>
         </div>
       </div>
     </div>
