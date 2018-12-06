@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth' ], function () {
     Route::post('/update/user/{id}', 'UserController@singleUpdate')->middleware('check');
 
     //View Order
-    Route::get('/view/{id}', 'OrderController@appointment');
+    Route::get('/view/{id}', 'OrderController@appointment')->middleware('check');
 
     //View Last Submitted Orders
     Route::get('/submitted', 'OrderController@lastOrder');

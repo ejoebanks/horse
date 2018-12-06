@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-if (Auth::user()->id == $ccc->clientid) {
+if (is_object($ccc) && Auth::user()->id == $ccc->clientid) {
 ?>
 <div class="container">
 <div class="row">
@@ -31,9 +31,8 @@ if (Auth::user()->id == $ccc->clientid) {
 <?php
 } else {
     ?>
-  @include('functions.denied')
+    <script>window.location.replace("https://horsebraiding.com/");</script>
 <?php
 } ?>
-
 </div>
 @endsection
