@@ -15,6 +15,7 @@ if (Auth::user()->id == $ccc->clientid) {
       print "<ul style='font-size:17px;' class='list-group'>";
       print "<li class='list-group-item'>Horse Name<div class='float-right'>$ccc->horsename</div><br>";
       print "</li>";
+      print "<li class='list-group-item'>Date<div class='float-right'>$ccc->scheduledtime</div><br>";
       print "<li class='list-group-item'>Location<div class='float-right'>$ccc->address, $ccc->city, $ccc->state</div><br>";
       print "<li class='list-group-item'>Building<div class='float-right'>$ccc->buildingid</div><br>";
       print "<li class='list-group-item'>Service<div class='float-right'>$ccc->servicename</div><br>";

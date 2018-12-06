@@ -9,7 +9,7 @@
     <div class="col">
     </div>
     <div class="col-md-6">
-			<?= $freqAlert ?>
+			<?= $freqAlert; ?>
 			<form method="post" action="{{ action('OrderController@scheduleAppt') }}">
 			  <div class="row">
 			    <div class="col-md-6">

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-if (Auth::user() != null) {
-    ?>
     <div class="container">
       <table class="table table-striped">
         <thead>
@@ -47,13 +44,6 @@ if (Auth::user() != null) {
         </tbody>
     </table>
     <br/>
-    <?php
-} else {
-        ?>
-      @include('functions.denied')
-    <?php
-    } ?>
-
 
 <div>
 @endsection

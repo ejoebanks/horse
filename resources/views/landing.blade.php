@@ -50,7 +50,7 @@
         <img class="card-img-top" src="{{ asset('images/information.png') }}" alt="">
         <div class="card-body">
           <h4 class="card-title">Schedule</h4>
-          <p class="card-text">If you're interested in making an appointment, take a look at my schedule to see what is open.</p>
+          <p class="card-text">If you're interested in making an appointment, take a look at my schedule to see what days I have open.</p>
         </div>
         <div class="card-footer">
           <a href="/calendar" class="btn btn-primary">View</a>
