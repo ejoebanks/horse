@@ -33,18 +33,18 @@ class Kernel extends ConsoleKernel
             $today = new DateTime('today', new DateTimeZone('America/Chicago'));
             $order = \DB::table('orders')
                       ->select('orders.*')
+                      ->where('notified', '!=', '1')
                       ->orderBy('scheduledtime', 'asc')
                       ->get();
 
             foreach ($order as $obj) {
-
                 // Check difference between now and appointment date
                 $date = new Datetime($obj->scheduledtime,
                         new DateTimeZone('America/Chicago'));
                 $interval = $today->diff($date);
                 $final = $interval->days * 24 + $interval->h;
 
-                if ($final <= 24 && $obj->notified == 0) {
+                if ($final <= 24) {
                     // Send e-mail to the client
                     $sendTo = \App\User::find($obj->clientid);
                     $sendTo->notify(new AppointmentReminder());
@@ -55,7 +55,7 @@ class Kernel extends ConsoleKernel
                     $thisOrder->save();
                 }
             }
-          })->twiceDaily(1, 13);
+          });
     }
 
     /**
