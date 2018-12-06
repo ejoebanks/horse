@@ -84,8 +84,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             //'type' => User::DEFAULT_TYPE,
         ]);
+
         $sendTo = \App\User::find($user["id"]);
         $sendTo->notify(new NewUser());
+
         return $user;
     }
 }
