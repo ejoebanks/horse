@@ -315,7 +315,6 @@ class OrderController extends Controller
                   ->where('employeeid', Auth::user()->id)
                   ->select('orders.*', 'orders.id as order_id')
                   ->get();
-
             $editable = true;
         } else {
             $data = \DB::table('orders')

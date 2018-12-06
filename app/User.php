@@ -42,6 +42,7 @@ class User extends Authenticatable
         $user->city = $data['city'];
         $user->state = $data['state'];
         $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
         $user->save();
         return 1;
     }
