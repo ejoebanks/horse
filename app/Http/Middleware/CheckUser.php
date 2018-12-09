@@ -19,7 +19,6 @@ class CheckUser
     public function handle($request, Closure $next)
     {
         $routeFromID = $int = (int) preg_replace('/\D/', '', $request->route()->parameters()['id']);
-        var_dump($request->route()->parameters['id']);
         $reqRoute = $request->route()->uri;
 
         $id = Auth::user()->id;
@@ -27,10 +26,13 @@ class CheckUser
             return redirect('/update/user/'.$id);
         }
 
+        if(!is_object(Order::find($routeFromID)) && $reqRoute == 'view/{id}'){
+          return redirect()->back();
+        }
 
         if ($reqRoute == 'view/{id}') {
             $amt = Order::select('clientid')->where('id', $routeFromID)->value('clientid');
-            if (!is_object(Order::find($routeFromID)) || $id != $amt) {
+            if ($id != $amt && Auth::user()->type != 1) {
                 return redirect()->back();
             }
         }

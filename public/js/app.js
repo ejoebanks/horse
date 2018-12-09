@@ -13372,6 +13372,7 @@ $.ajaxSetup({
    });
 
 $( document ).ready(function() {
+  $('input[name="scheduledtime"]').mask('0000-00-00');
   $('#scheduledtime').datepicker({
       format: 'yyyy-mm-dd',
       uiLibrary: 'bootstrap4'
